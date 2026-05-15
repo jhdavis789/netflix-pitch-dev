@@ -197,12 +197,12 @@
   }
   .pillar h4 {
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--navy-darkest);
     margin: 4px 0 6px;
   }
-  .pillar p { font-size: 12.5px; color: var(--gray-700); line-height: 1.5; }
+  .pillar p { font-size: 13.5px; color: var(--gray-700); line-height: 1.5; }
 
   /* Right-rail metrics card */
   .metrics-card {
@@ -255,18 +255,18 @@
   .chart-wrap canvas { width: 100% !important; height: 100% !important; }
 
   .body-copy {
-    font-size: 14px;
+    font-size: 15.5px;
     line-height: 1.6;
     color: var(--gray-700);
-    margin: 6px 0;
+    margin: 8px 0;
   }
   .body-copy strong { color: var(--navy-darkest); }
   ul.bullets { list-style: none; padding: 0; }
   ul.bullets li {
     position: relative;
-    padding-left: 18px;
-    margin: 10px 0;
-    font-size: 14px;
+    padding-left: 20px;
+    margin: 14px 0;
+    font-size: 16px;
     color: var(--gray-700);
     line-height: 1.55;
   }
@@ -430,11 +430,11 @@
   }
   .risk-card h4 {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 19px;
     color: var(--navy-darkest);
     margin: 6px 0 8px;
   }
-  .risk-card p { font-size: 13px; line-height: 1.55; color: var(--gray-700); }
+  .risk-card p { font-size: 14.5px; line-height: 1.55; color: var(--gray-700); }
   .risk-card .signpost {
     margin-top: 10px;
     font-size: 12px;
@@ -558,13 +558,15 @@ function renderAll() {
   deck.innerHTML = '';
   SLIDES.forEach((fn, i) => {
     const s = document.createElement('div');
-    s.className = 'slide' + (i === 0 ? ' active' : '');
+    // Slide 0 is the cover — give it the cover background directly so the
+    // function body can return cover content without nesting another .slide
+    s.className = 'slide' + (i === 0 ? ' active cover' : (i === 0 ? ' cover' : ''));
+    if (i === 0) s.className = 'slide active cover';
     s.id = 'slide-' + i;
     s.innerHTML = fn(i);
     deck.appendChild(s);
   });
   document.getElementById('total').textContent = SLIDES.length;
-  // After mount, init any chart canvases
   SLIDES.forEach((_, i) => { if (CHART_INIT[i]) CHART_INIT[i](i); });
 }
 
@@ -586,18 +588,16 @@ function slideHeader(eyebrow, title) {
 
 // ============================ SLIDES =================================
 const SLIDES = [
-  // 0 — Cover
+  // 0 — Cover (rendered directly inside the outer .slide; no nested .slide)
   (i) => `
-  <div class="slide cover" style="position:absolute; inset:0;">
     <div class="brand-mark">CAPITAL GROUP — EQUITY RESEARCH</div>
     <div class="ticker">NFLX · NASDAQ · LARGE CAP CORE GROWTH</div>
     <h1>Netflix: the only streamer with the scale to underwrite WBD — and the only one who doesn't need to.</h1>
-    <div class="subline">A long-only investment memo on the dominant distributor in a market where distribution is defense.</div>
+    <div class="subline">A long-only investment memo on the dominant distributor in global streaming.</div>
     <div class="footer-meta">
       <span>Investment memo · May 2026</span>
       <span>Prepared for portfolio review</span>
-    </div>
-  </div>`,
+    </div>`,
 
   // 1 — Investment Summary one-pager
   (i) => `
@@ -700,11 +700,11 @@ const SLIDES = [
 
   // 5 — Scale dynamics (the moat)
   (i) => `
-  ${slideHeader('Moat', 'Distribution is defense — the only one that scales in the AI era')}
+  ${slideHeader('Moat', 'Distribution is the moat — the only asset that scales in the AI era')}
   <div class="two-col">
     <div class="col">
       <h2>Why distribution wins now</h2>
-      <p class="body-copy">Eagle Capital framed it cleanly: <em>"if content was king as the internet scaled, distribution is defense within this next wave of disruption."</em> AI lowers the cost of producing content. It does not lower the cost of <strong>discovering</strong> content. The 325M-subscriber funnel — and the data it generates — is the asset that can't be cloned.</p>
+      <p class="body-copy">AI lowers the cost of <em>producing</em> content. It does not lower the cost of <strong>discovering</strong> content. With ~1B global viewers, the lowest churn in the industry, and a recommendation engine refined over a decade of paid-viewing data, Netflix owns the channel that consumers use to find content. The 325M-subscriber funnel is the asset that can't be cloned at price.</p>
       <ul class="bullets">
         <li><strong>Same content, more value.</strong> F1 broadcast rights went from free (Liberty Media, 2018) to ~$150M/yr (Apple, 2025) <em>after</em> Drive to Survive ran on Netflix.</li>
         <li><strong>Churn proves stickiness.</strong> Netflix prints the lowest 30-day churn in scaled streaming — every other platform has to spend on S&M just to refill the bucket.</li>
@@ -870,7 +870,7 @@ const SLIDES = [
     <div class="risk-card">
       <div class="risk-label">Risk 04 — AI / content commoditization</div>
       <h4>Generative AI floods premium content</h4>
-      <p>Eagle's "atoms vs bits" framing: AI is a deflationary force on bits-businesses. Netflix is the most defensible bits business in media — but it is still a bits business.</p>
+      <p>AI is a deflationary force on digital-only businesses. Netflix is the most defensible digital business in media — but it is still one. If generative tools dramatically cut the cost of producing premium content, the value of incumbency erodes.</p>
       <div class="signpost">Signpost: cost-of-content trends; emergence of competing distributors leveraging AI to undercut.</div>
     </div>
     <div class="risk-card">
@@ -899,7 +899,7 @@ const SLIDES = [
         <li><strong>Quantitative extraction:</strong> SEC XBRL <em>companyfacts</em> API for Netflix CIK 0001065280. Tags: <code>Revenues</code>, <code>CostOfRevenue</code>, <code>MarketingExpense</code> / <code>SellingAndMarketingExpense</code>, <code>GeneralAndAdministrativeExpense</code>, <code>ResearchAndDevelopmentExpense</code>, <code>OperatingIncomeLoss</code>.</li>
         <li><strong>Management guidance:</strong> Q4 2025 shareholder letter (Jan 20, 2026 8-K) and conference-call commentary.</li>
         <li><strong>Stock split:</strong> 10-for-1 forward split effective Nov 17, 2025 (NFLX press release). All per-share numbers are split-adjusted.</li>
-        <li><strong>Industry framing:</strong> Eagle Capital Q2 2023 investor letter ("distribution is defense"). Ben Thompson, Stratechery archives.</li>
+        <li><strong>Industry framing:</strong> Ben Thompson, Stratechery archives (distribution-first analysis of streaming).</li>
         <li><strong>Peer multiples:</strong> Mid-May 2026 sell-side consensus rollup; ranges only, not point estimates.</li>
       </ul>
     </div>

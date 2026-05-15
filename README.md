@@ -1,8 +1,9 @@
 # Netflix (NFLX) — Long-Only Investment Memo
 
 A single-page HTML pitch deck for NFLX framed for a long-only large asset
-manager. Capital Group-styled. Built from SEC EDGAR primary filings, not
-LLM-imagined numbers.
+manager. Built from SEC EDGAR primary filings, not LLM-imagined numbers.
+
+By JAOD & (mainly) Claude.
 
 **Live deck:** see GitHub Pages URL for this repo.
 

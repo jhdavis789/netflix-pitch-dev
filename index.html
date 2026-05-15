@@ -182,6 +182,32 @@
     border-top: 1px solid rgba(255,255,255,0.18);
     padding-top: 18px;
   }
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+    max-width: 900px;
+  }
+  .cover-stat {
+    border-left: 2px solid var(--teal-light);
+    padding: 4px 0 4px 14px;
+  }
+  .cover-stat .cs-label {
+    font-size: 10.5px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 6px;
+  }
+  .cover-stat .cs-value {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
 
   /* ===== Summary one-pager ===== */
   .summary-grid {
@@ -610,13 +636,19 @@ function slideHeader(eyebrow, title) {
 const SLIDES = [
   // 0 — Cover (rendered directly inside the outer .slide; no nested .slide)
   (i) => `
-    <div class="brand-mark">CAPITAL GROUP — EQUITY RESEARCH</div>
+    <div class="brand-mark">EQUITY RESEARCH · LONG-ONLY MEMO</div>
     <div class="ticker">NFLX · NASDAQ · LARGE CAP CORE GROWTH</div>
     <h1>Netflix: the only streamer with the scale to underwrite WBD — and the only one who doesn't need to.</h1>
     <div class="subline">A long-only investment memo on the dominant distributor in global streaming.</div>
+    <div class="cover-stats" id="cover-stats">
+      <div class="cover-stat"><div class="cs-label">Price</div><div class="cs-value" id="cs-price">—</div></div>
+      <div class="cover-stat"><div class="cs-label">Market cap</div><div class="cs-value" id="cs-mcap">—</div></div>
+      <div class="cover-stat"><div class="cs-label">FY26E EV / EBIT</div><div class="cs-value" id="cs-multiple">—</div></div>
+      <div class="cover-stat"><div class="cs-label">Buyback yield</div><div class="cs-value" id="cs-divy">—</div></div>
+    </div>
     <div class="footer-meta">
       <span>Investment memo · May 2026</span>
-      <span>Prepared for portfolio review</span>
+      <span>By JAOD &amp; (mainly) Claude</span>
     </div>`,
 
   // 1 — Investment Summary one-pager
@@ -938,6 +970,20 @@ const SLIDES = [
 ];
 
 // ============================ CHART INITS ============================
+CHART_INIT[0] = () => {
+  // Cover stats
+  const h = D.historicals;
+  const fy26 = D.scenarios.no_deal_base.projection[0];
+  const fy26ev = (D.current_price * D.shares_out + D.existing_net_debt) / fy26.ebit;
+  // NFLX doesn't pay a dividend — show buyback yield ($9.1B FY25 repurchase / mkt cap)
+  const buyback_yield = 9.1e9 / (D.current_price * D.shares_out);
+  const setC = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setC('cs-price',    '$' + D.current_price.toFixed(2));
+  setC('cs-mcap',     '$' + D.market_cap_b.toFixed(0) + 'B');
+  setC('cs-multiple', fy26ev.toFixed(1) + '×');
+  setC('cs-divy',     (buyback_yield * 100).toFixed(1) + '%');
+};
+
 CHART_INIT[1] = () => {
   // Bind the metrics card and recommendation row to deck_data.json
   const h = D.historicals;

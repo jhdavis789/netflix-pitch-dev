@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Netflix (NFLX) — Long-Only Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy-darkest: #00294b;
+    --navy-dark:    #003a66;
+    --navy:         #005f9e;
+    --navy-light:   #0075b5;
+    --teal:         #007e6c;
+    --teal-light:   #75d9d7;
+    --magenta:      #a6256e;
+    --warm:         #ebe0da;
+    --warm-deep:    #d9c5ba;
+    --bg-light-blue:#def5ff;
+    --bg-light-teal:#ddf6f6;
+    --bg-light-pink:#fbedf5;
+    --gray-50:      #fafafa;
+    --gray-100:     #f1f1f1;
+    --gray-200:     #e2e2e2;
+    --gray-300:     #c8cdd2;
+    --gray-500:     #6b7f8a;
+    --gray-700:     #3d4a55;
+    --ink:          #00294b;
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--gray-100);
+    overflow: hidden;
+  }
+  body { line-height: 1.45; }
+
+  .deck { position: relative; height: 100vh; width: 100vw; overflow: hidden; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    padding: 56px 80px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+    overflow: auto;
+  }
+  .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+  .slide-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .slide h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 38px;
+    color: var(--navy-darkest);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .slide h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--navy-dark);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .slide h3 {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .ticker-tag {
+    background: var(--navy-darkest);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+
+  /* ===== Cover ===== */
+  .cover {
+    background: linear-gradient(135deg, var(--navy-darkest) 0%, var(--navy-dark) 50%, var(--navy) 100%);
+    color: #fff;
+    padding: 100px 100px;
+    justify-content: center;
+  }
+  .cover .brand-mark {
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    margin-bottom: 50px;
+  }
+  .cover .ticker {
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 2.5px;
+    font-weight: 600;
+    color: var(--teal-light);
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1.05;
+    color: #fff;
+    max-width: 900px;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .cover .subline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--teal-light);
+    max-width: 700px;
+    line-height: 1.35;
+  }
+  .cover .footer-meta {
+    position: absolute;
+    bottom: 60px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    padding-top: 18px;
+  }
+
+  /* ===== Summary one-pager ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+    flex: 1;
+    min-height: 0;
+  }
+  .summary-thesis { display: flex; flex-direction: column; gap: 18px; }
+  .thesis-pull {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--navy-dark);
+    line-height: 1.35;
+    padding: 20px 0 22px 22px;
+    border-left: 3px solid var(--teal);
+  }
+  .pillars { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  .pillar {
+    background: var(--bg-light-blue);
+    padding: 16px 18px;
+    border-radius: 4px;
+  }
+  .pillar .pillar-num {
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .pillar h4 {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy-darkest);
+    margin: 4px 0 6px;
+  }
+  .pillar p { font-size: 12.5px; color: var(--gray-700); line-height: 1.5; }
+
+  /* Right-rail metrics card */
+  .metrics-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .metrics-card h3 { color: var(--navy); margin-bottom: 14px; }
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--gray-200);
+    font-size: 13px;
+  }
+  .metric-row:last-child { border: none; }
+  .metric-row .lbl { color: var(--gray-500); }
+  .metric-row .val { color: var(--navy-darkest); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .metric-row .val.pos { color: var(--teal); }
+  .metric-row .val.neg { color: var(--magenta); }
+
+  .reco-box {
+    margin-top: 18px;
+    background: var(--navy-darkest);
+    color: white;
+    padding: 22px 24px;
+    border-radius: 6px;
+  }
+  .reco-box .reco-label { font-size: 11px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; }
+  .reco-box .reco-action {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 6px 0 4px;
+  }
+  .reco-box .reco-meta { font-size: 13px; color: var(--teal-light); }
+
+  /* ===== Generic two-column ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    flex: 1;
+    min-height: 0;
+  }
+  .col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+  .chart-wrap { flex: 1; min-height: 0; position: relative; }
+  .chart-wrap canvas { width: 100% !important; height: 100% !important; }
+
+  .body-copy {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--gray-700);
+    margin: 6px 0;
+  }
+  .body-copy strong { color: var(--navy-darkest); }
+  ul.bullets { list-style: none; padding: 0; }
+  ul.bullets li {
+    position: relative;
+    padding-left: 18px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.55;
+  }
+  ul.bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    background: var(--teal);
+  }
+  ul.bullets li strong { color: var(--navy-darkest); }
+
+  /* Number callouts */
+  .callout-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 8px 0 20px;
+  }
+  .callout {
+    background: var(--bg-light-teal);
+    padding: 16px 18px;
+    border-radius: 4px;
+    border-left: 3px solid var(--teal);
+  }
+  .callout .co-val {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy-darkest);
+    line-height: 1;
+  }
+  .callout .co-lbl {
+    font-size: 11px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-top: 6px;
+  }
+
+  /* Tables */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.data th, table.data td {
+    padding: 8px 10px;
+    text-align: right;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  table.data th {
+    background: var(--navy-darkest);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10.5px;
+    text-align: right;
+  }
+  table.data td:first-child, table.data th:first-child { text-align: left; }
+  table.data tr.highlight td { background: var(--bg-light-blue); font-weight: 600; color: var(--navy-darkest); }
+
+  /* Sensitivity heatmap */
+  .heatmap {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+  }
+  .heatmap td {
+    padding: 14px 10px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .heatmap th {
+    padding: 6px;
+    font-size: 11px;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  /* Footer/page numbers */
+  .slide-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: var(--gray-500);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  /* Nav controls */
+  .nav-controls {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--gray-200);
+    padding: 6px 10px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,41,75,0.10);
+    font-size: 12px;
+  }
+  .nav-controls button {
+    background: transparent;
+    border: none;
+    color: var(--navy);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .nav-controls button:hover { color: var(--navy-darkest); }
+  .nav-controls .counter { color: var(--gray-500); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  .footnote {
+    font-size: 10.5px;
+    color: var(--gray-500);
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.45;
+  }
+
+  /* Risks/wrong slide */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    flex: 1;
+    align-content: start;
+  }
+  .risk-card {
+    border: 1px solid var(--gray-200);
+    padding: 18px 20px;
+    border-radius: 6px;
+    background: var(--gray-50);
+  }
+  .risk-card .risk-label {
+    color: var(--magenta);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .risk-card h4 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--navy-darkest);
+    margin: 6px 0 8px;
+  }
+  .risk-card p { font-size: 13px; line-height: 1.55; color: var(--gray-700); }
+  .risk-card .signpost {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--navy);
+    border-top: 1px dotted var(--gray-300);
+    padding-top: 8px;
+  }
+
+  /* Generic two-row top, chart bottom */
+  .row-then-chart { display: flex; flex-direction: column; gap: 16px; flex: 1; min-height: 0; }
+  .row-then-chart .chart-wrap { flex: 1; }
+
+  /* Football field */
+  .football {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
+  }
+  .ff-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 0;
+    font-size: 13px;
+  }
+  .ff-bar-track {
+    height: 28px;
+    position: relative;
+    background: var(--gray-100);
+    border-radius: 3px;
+  }
+  .ff-bar {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, var(--navy), var(--navy-light));
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .ff-bar.deal { background: linear-gradient(90deg, var(--teal), var(--teal-light)); color: var(--navy-darkest); }
+  .ff-bar.bear { background: linear-gradient(90deg, var(--magenta), #d678a8); }
+  .ff-curprice {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    width: 2px;
+    background: var(--navy-darkest);
+    z-index: 5;
+  }
+  .ff-curprice::after {
+    content: 'Current $83';
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--navy-darkest);
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+  .ff-label { font-weight: 500; color: var(--navy-darkest); font-size: 13px; }
+  .ff-px { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--gray-700); text-align: right; }
+</style>
+</head>
+<body>
+<div class="deck" id="deck"></div>
+<div class="nav-controls">
+  <button id="prev">‹</button>
+  <span class="counter"><span id="cur">1</span> / <span id="total">14</span></span>
+  <button id="next">›</button>
+</div>
+
+<script>
+const fmt$B = (x) => '$' + (x/1e9).toFixed(1) + 'B';
+const fmt$M = (x) => '$' + (x/1e6).toFixed(0) + 'M';
+const fmtPct = (x, d=1) => (x*100).toFixed(d) + '%';
+const fmt$ = (x) => '$' + x.toFixed(0);
+
+// CapGroup palette as JS constants
+const C = {
+  navyDarkest: '#00294b',
+  navyDark: '#003a66',
+  navy: '#005f9e',
+  navyLight: '#0075b5',
+  teal: '#007e6c',
+  tealLight: '#75d9d7',
+  magenta: '#a6256e',
+  warm: '#d9c5ba',
+  gray500: '#6b7f8a',
+  gray200: '#e2e2e2',
+};
+
+// Chart.js defaults — Jackson's rules: no black ink, straight lines, visible dots
+Chart.defaults.font.family = '"Inter", -apple-system, sans-serif';
+Chart.defaults.font.size = 11;
+Chart.defaults.color = C.navyDarkest;
+Chart.defaults.borderColor = C.gray200;
+Chart.defaults.elements.line.tension = 0;
+Chart.defaults.elements.point.radius = 4;
+Chart.defaults.elements.point.hoverRadius = 6;
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+Chart.defaults.plugins.legend.labels.padding = 14;
+
+let D = null;  // loaded deck data
+
+async function load() {
+  const r = await fetch('data/deck_data.json');
+  D = await r.json();
+  renderAll();
+}
+
+function renderAll() {
+  const deck = document.getElementById('deck');
+  deck.innerHTML = '';
+  SLIDES.forEach((fn, i) => {
+    const s = document.createElement('div');
+    s.className = 'slide' + (i === 0 ? ' active' : '');
+    s.id = 'slide-' + i;
+    s.innerHTML = fn(i);
+    deck.appendChild(s);
+  });
+  document.getElementById('total').textContent = SLIDES.length;
+  // After mount, init any chart canvases
+  SLIDES.forEach((_, i) => { if (CHART_INIT[i]) CHART_INIT[i](i); });
+}
+
+const CHART_INIT = {};
+
+function slideFooter(i) {
+  return `<div class="slide-footer"><span>NETFLIX (NFLX) — INVESTMENT MEMO</span><span>${(i+1).toString().padStart(2,'0')} / ${SLIDES.length.toString().padStart(2,'0')}</span></div>`;
+}
+
+function slideHeader(eyebrow, title) {
+  return `<div class="slide-header">
+    <div>
+      <div class="eyebrow">${eyebrow}</div>
+      <h1>${title}</h1>
+    </div>
+    <span class="ticker-tag">NFLX · NASDAQ</span>
+  </div>`;
+}
+
+// ============================ SLIDES =================================
+const SLIDES = [
+  // 0 — Cover
+  (i) => `
+  <div class="slide cover" style="position:absolute; inset:0;">
+    <div class="brand-mark">CAPITAL GROUP — EQUITY RESEARCH</div>
+    <div class="ticker">NFLX · NASDAQ · LARGE CAP CORE GROWTH</div>
+    <h1>Netflix: the only streamer with the scale to underwrite WBD — and the only one who doesn't need to.</h1>
+    <div class="subline">A long-only investment memo on the dominant distributor in a market where distribution is defense.</div>
+    <div class="footer-meta">
+      <span>Investment memo · May 2026</span>
+      <span>Prepared for portfolio review</span>
+    </div>
+  </div>`,
+
+  // 1 — Investment Summary one-pager
+  (i) => `
+  ${slideHeader('Investment summary', 'A platform that compounds at scale')}
+  <div class="summary-grid">
+    <div class="summary-thesis">
+      <div class="thesis-pull">"Internet distribution is more scalable than content." With 325M paid memberships and ~1B global viewers, Netflix has locked the distribution channel — and operating leverage is doing the rest.</div>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-num">01</div><h4>Dominant distribution moat</h4><p>~90% of profits among scaled streamers. ARPU pricing power proven (~+10% in U.S.). Lowest churn in the category.</p></div>
+        <div class="pillar"><div class="pillar-num">02</div><h4>Compounding operating leverage</h4><p>Content costs fell from 63% → 51% of revenue and marketing from 15% → 7% since 2018. EBIT margin tripled to 29.5%.</p></div>
+        <div class="pillar"><div class="pillar-num">03</div><h4>Optionality on WBD</h4><p>If walked away — buybacks restart. If acquired at Paramount-match terms — a $91B content library at ~10–11× incremental EBIT after a 10% bundle price uplift.</p></div>
+        <div class="pillar"><div class="pillar-num">04</div><h4>Underwriting at current price</h4><p>At ~22.6× FY26 EV/EBIT, the market is paying for dominance but not for the WBD optionality and not for the ad-tier doubling.</p></div>
+      </div>
+      <p class="footnote">Sources: NFLX 10-K (FY18–FY25, SEC EDGAR); FY26 management guidance (Jan 2026 shareholder letter); consensus peer multiples (mid-May 2026 rollup).</p>
+    </div>
+    <div>
+      <div class="metrics-card">
+        <h3>At-a-glance</h3>
+        <div class="metric-row"><span class="lbl">Price (May 2026)</span><span class="val">$83.00</span></div>
+        <div class="metric-row"><span class="lbl">Market cap</span><span class="val">$360 B</span></div>
+        <div class="metric-row"><span class="lbl">Net debt</span><span class="val">$7.9 B</span></div>
+        <div class="metric-row"><span class="lbl">FY25A revenue</span><span class="val">$45.2 B</span></div>
+        <div class="metric-row"><span class="lbl">FY25A EBIT</span><span class="val">$13.3 B</span></div>
+        <div class="metric-row"><span class="lbl">FY25A EBIT margin</span><span class="val pos">29.5%</span></div>
+        <div class="metric-row"><span class="lbl">FY26E EBIT (guide)</span><span class="val">$16.3 B</span></div>
+        <div class="metric-row"><span class="lbl">FY26E EV / EBIT</span><span class="val">22.6×</span></div>
+      </div>
+      <div class="reco-box">
+        <div class="reco-label">Recommendation</div>
+        <div class="reco-action">BUY</div>
+        <div class="reco-meta">Base case target: <strong style="color:white;">$122</strong> (no deal) / <strong style="color:white;">$139</strong> (WBD deal at Paramount terms) — 4-yr IRR 10–14%</div>
+      </div>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 2 — Football field / scenario IRRs
+  (i) => `
+  ${slideHeader('Valuation', '4-year scenario ladder: where the price target lands')}
+  <p class="body-copy" style="margin-bottom:10px;">Five-year EBIT × 17× forward exit multiple − net debt + interim FCF. Targets discounted at IRR back from FY30. Even the bear-case (WBD overpay + integration drag) clears the current price.</p>
+  <div class="football" id="football"></div>
+  <p class="footnote">Method: project FY26E–FY30E revenue and EBIT under each scenario, apply 17× exit EV/EBIT to FY30 EBIT, credit FY26–FY28 free cash (80% conversion), subtract net debt including incremental WBD financing. Discount to current.</p>
+  ${slideFooter(i)}`,
+
+  // 3 — Business: what NFLX actually is
+  (i) => `
+  ${slideHeader('Business', 'What Netflix actually is — a distribution platform that owns content economics')}
+  <div class="two-col">
+    <div class="col">
+      <h2>The business in one paragraph</h2>
+      <p class="body-copy">Netflix is the global streaming platform with <strong>325M paid memberships</strong> across ~190 countries. Each subscriber funds ~$140/year of revenue against a $20B annual content budget — meaning Netflix can outspend every rival on programming and still expand margins. The platform's owned distribution (apps on every TV, phone, console) and recommendation algorithm create the kind of compounding flywheel that took Google and Meta two decades to build.</p>
+      <h3 style="margin-top:18px;">FY24 revenue mix by region</h3>
+      <div class="chart-wrap" style="height:240px;"><canvas id="ch-region"></canvas></div>
+    </div>
+    <div class="col">
+      <h2>What makes it different</h2>
+      <ul class="bullets">
+        <li><strong>Distribution first, content second.</strong> Netflix built the channel; the content libraries (Disney, WBD) came later and now have to come to Netflix.</li>
+        <li><strong>Algorithmic discovery is a moat.</strong> With ~1B global viewers, Netflix can <em>create</em> fad value out of thin air — F1, Suits, Squid Game, KPop Demon Hunters.</li>
+        <li><strong>Ad tier is structural margin upside.</strong> Ad revenue doubled in 2025 to $1.5B; mgmt guide is another double to $3B in 2026 — overwhelmingly drops to EBIT.</li>
+        <li><strong>Pricing power is repeatedly proven.</strong> Multiple U.S. price increases since 2022 without material churn — the strongest evidence that the bundle is sticky.</li>
+      </ul>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 4 — Subscribers + ARPU by region (NEW)
+  (i) => `
+  ${slideHeader('Subscribers & ARPU', 'Where the 301M+ subs and the dollars actually live')}
+  <div class="two-col">
+    <div class="col">
+      <h2>Paid memberships by region (FY24)</h2>
+      <div class="chart-wrap" style="height:300px;"><canvas id="ch-subs"></canvas></div>
+      <p class="footnote">UCAN = U.S. and Canada; EMEA = Europe, Middle East, Africa; LATAM = Latin America; APAC = Asia-Pacific. Source: NFLX FY2024 10-K, page F-12.</p>
+    </div>
+    <div class="col">
+      <h2>ARPU per region (FY24 ARM, $/month)</h2>
+      <div class="chart-wrap" style="height:300px;"><canvas id="ch-arpu"></canvas></div>
+      <p class="body-copy"><strong>The dollar story:</strong> UCAN has 30% of subs but 43% of revenue ($17.4B). EMEA has 33% of subs (101M) at 66% of UCAN's ARPU — the largest pool of remaining pricing power. APAC and LATAM are the volume engine; pricing follows scale.</p>
+      <p class="body-copy" style="margin-top:14px;"><strong>Why this matters for WBD:</strong> WBD's HBO Max library raises perceived bundle value most where ARPU is highest (UCAN). A 10% U.S. price rise is ~$2/month — and U.S. has demonstrated tolerance for 4 price increases in 5 years.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 5 — Operating leverage in one chart
+  (i) => `
+  ${slideHeader('The thesis in one chart', 'Operating leverage: content + marketing falling, EBIT tripling')}
+  <div class="row-then-chart">
+    <div class="callout-row">
+      <div class="callout"><div class="co-val">63% → 52%</div><div class="co-lbl">Content cost / revenue (FY18 → FY25)</div></div>
+      <div class="callout"><div class="co-val">15% → 7%</div><div class="co-lbl">Marketing / revenue (FY18 → FY25)</div></div>
+      <div class="callout"><div class="co-val">10% → 30%</div><div class="co-lbl">EBIT margin (FY18 → FY25)</div></div>
+      <div class="callout"><div class="co-val">2.9×</div><div class="co-lbl">Revenue compounded (FY18 → FY25)</div></div>
+    </div>
+    <div class="chart-wrap"><canvas id="ch-leverage"></canvas></div>
+  </div>
+  <p class="footnote">All values from Netflix 10-K filings (FY2018–FY2025), pulled via SEC XBRL companyfacts API. Content cost = total cost of revenue (programming + delivery). Marketing = MarketingExpense (≤2021) and SellingAndMarketingExpense (≥2022) tags.</p>
+  ${slideFooter(i)}`,
+
+  // 5 — Scale dynamics (the moat)
+  (i) => `
+  ${slideHeader('Moat', 'Distribution is defense — the only one that scales in the AI era')}
+  <div class="two-col">
+    <div class="col">
+      <h2>Why distribution wins now</h2>
+      <p class="body-copy">Eagle Capital framed it cleanly: <em>"if content was king as the internet scaled, distribution is defense within this next wave of disruption."</em> AI lowers the cost of producing content. It does not lower the cost of <strong>discovering</strong> content. The 325M-subscriber funnel — and the data it generates — is the asset that can't be cloned.</p>
+      <ul class="bullets">
+        <li><strong>Same content, more value.</strong> F1 broadcast rights went from free (Liberty Media, 2018) to ~$150M/yr (Apple, 2025) <em>after</em> Drive to Survive ran on Netflix.</li>
+        <li><strong>Churn proves stickiness.</strong> Netflix prints the lowest 30-day churn in scaled streaming — every other platform has to spend on S&M just to refill the bucket.</li>
+        <li><strong>Cost per sub is the moat.</strong> The same $20B content slate spread over 325M members vs Paramount's ~80M is a structural unit-cost advantage Disney and WBD cannot close.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h2>Profit share among scaled streamers</h2>
+      <div class="chart-wrap" style="height:280px;"><canvas id="ch-profitshare"></canvas></div>
+      <p class="footnote">Approximate share of streaming-segment operating profit, 2025E. Source: Morgan Stanley media coverage rollup, Jan 2026.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 6 — Historical financials trajectory
+  (i) => `
+  ${slideHeader('Financial history', 'Revenue and EBIT — eight years of scale economics')}
+  <div class="row-then-chart">
+    <div class="chart-wrap" style="height:380px;"><canvas id="ch-history"></canvas></div>
+    <table class="data">
+      <thead><tr><th>Fiscal year</th><th>Revenue ($B)</th><th>EBIT ($B)</th><th>EBIT margin</th><th>Content % rev</th><th>Marketing % rev</th><th>FCF proxy ($B)</th></tr></thead>
+      <tbody id="hist-table"></tbody>
+    </table>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 7 — FY26 setup
+  (i) => `
+  ${slideHeader('FY26 setup', 'Management guide implies $16B+ EBIT and 32%+ margin')}
+  <div class="two-col">
+    <div class="col">
+      <h2>What management said</h2>
+      <ul class="bullets">
+        <li><strong>Revenue $50.7B–$51.7B.</strong> 12–14% YoY growth, F/X-neutral 11–13%. Driven by paid-member growth, pricing, and a near-doubling of ad revenue to ~$3B.</li>
+        <li><strong>Operating margin 31.5%.</strong> Up from 29.5% in FY25; includes ~$275M of WBD-acquisition-related expenses, so clean margin is 32%+.</li>
+        <li><strong>Incremental EBIT margin: 45–47%.</strong> The operating-leverage trajectory has another five years to run.</li>
+        <li><strong>Ad tier: 100% YoY.</strong> Nearly all incremental ad revenue drops to EBIT. On $52B of revenue, this alone is ~250 bps of margin.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h2>Our FY26E numbers vs guide</h2>
+      <div class="chart-wrap" style="height:280px;"><canvas id="ch-fy26"></canvas></div>
+      <p class="footnote">Our base case sits at the midpoint of the guide. Bull case assumes mid-teens growth with continued ad-tier expansion driving 320 bps of margin expansion.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 9 — The WBD situation
+  (i) => `
+  ${slideHeader('Strategic optionality', 'WBD: a deal that works because Netflix already has the subs to spread the cost')}
+  <div class="two-col">
+    <div class="col">
+      <h2>What's on the table</h2>
+      <p class="body-copy">Paramount has bid $31/share in cash for WBD with the cable networks included. Netflix's earlier offer was $27.75/share with the WBD shareholders retaining the cable-network spin. To match Paramount's bid <em>and</em> keep the spin in place, Netflix would commit ~$91B of EV — roughly $71B incremental debt.</p>
+      <ul class="bullets">
+        <li><strong>Disciplined buyer signal.</strong> Mgmt frames this as content acquisition, not sports/live programming. Walking away is a real option.</li>
+        <li><strong>Math only works at Netflix's scale.</strong> A 10% bundle uplift = ~$2/mo U.S., ~$1 ROW, across 325M subs. Nobody else can do this math.</li>
+        <li><strong>Optionality is asymmetric.</strong> No deal → buyback restarts → re-rate. Deal → 5-year scale-and-monetize playbook → bigger but slower re-rate.</li>
+      </ul>
+      <h3 style="margin-top:18px;">$91B EV vs. annual content spend</h3>
+      <div class="chart-wrap" style="height:200px;"><canvas id="ch-wbd-spend"></canvas></div>
+      <p class="footnote">$91B WBD EV is roughly 4.4× Netflix's annual content cash spend ($20.5B FY25E), but the library is certified-hit IP with proven monetization economics.</p>
+    </div>
+    <div class="col">
+      <h2>Deal math, all-in</h2>
+      <table class="data">
+        <thead><tr><th>Item</th><th>$B</th></tr></thead>
+        <tbody>
+          <tr><td>WBD equity (Paramount-match: $31/sh × 2.6B)</td><td>80.6</td></tr>
+          <tr><td>+ Assumed net debt</td><td>10.6</td></tr>
+          <tr><td class="" style="font-weight:600;">= Enterprise value paid</td><td>91.2</td></tr>
+          <tr><td>− Cash + non-core asset proceeds</td><td>(20.0)</td></tr>
+          <tr class="highlight"><td>Incremental NFLX debt</td><td>71.2</td></tr>
+          <tr><td>+ Existing NFLX net debt</td><td>7.9</td></tr>
+          <tr class="highlight"><td>Pro-forma net debt</td><td>79.1</td></tr>
+          <tr><td>Pro-forma net debt / FY30E EBIT</td><td>~2.1×</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote">Stylized; actual structure would depend on antitrust outcome and any WBD cable-network spin. We model the higher-spend scenario (full $91B EV).</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 9 — Scenario IRRs
+  (i) => `
+  ${slideHeader('Scenario IRRs', 'Four paths, all positive — but the WBD-deal bear is the one to underwrite')}
+  <div class="two-col">
+    <div class="col">
+      <h2>FY30E EBIT bridges across scenarios</h2>
+      <div class="chart-wrap" style="height:340px;"><canvas id="ch-scenarios"></canvas></div>
+    </div>
+    <div class="col">
+      <h2>Outputs</h2>
+      <table class="data">
+        <thead><tr><th>Scenario</th><th>FY30 EBIT ($B)</th><th>Target $</th><th>Upside</th><th>4-yr IRR</th></tr></thead>
+        <tbody id="scenario-table"></tbody>
+      </table>
+      <p class="body-copy" style="margin-top:16px;">The asymmetry: in the bear case (WBD overpay + drag) we still earn ~6% IRR over four years from a stock the market already discounts as having "lost the plot." In the no-deal-base case, we earn double-digit IRR with optionality intact. The deal isn't a binary risk — it's a fork in a path that leads to the same destination.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 10 — Sensitivity heatmap
+  (i) => `
+  ${slideHeader('Sensitivity', 'Exit multiple × FY30 EBIT margin — IRR range under WBD-deal base')}
+  <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; flex:1;">
+    <div>
+      <h3>4-year IRR (%)</h3>
+      <table class="heatmap" id="sens-table"></table>
+      <p class="footnote">Color intensity scales with IRR. Center cell (17× × 38% margin) corresponds to WBD-deal-base assumptions used elsewhere in this memo.</p>
+    </div>
+    <div>
+      <h3>How we ended up here</h3>
+      <p class="body-copy">The valuation is more sensitive to <strong>FY30 EBIT margin</strong> than to the exit multiple — a 200bps margin miss costs more IRR than a full turn of multiple compression. This is why we keep returning to operating leverage as the load-bearing claim.</p>
+      <p class="body-copy"><strong>Reasonable disagreement</strong> on margin lands you between 35% and 40% (consensus FY30 is ~37%). At 38% × 17× you earn ~14% IRR; at 35% × 15× you still earn ~7%. To get to a negative IRR you need margin below 32% <em>and</em> multiple compression to 13× — both unprecedented on this trajectory.</p>
+      <p class="body-copy"><strong>Why we use 17× as the central case:</strong> Netflix has traded between 15× and 35× forward EV/EBIT over the past three years. 17× is in the bottom quartile and assumes the market never re-rates the platform for the scale dominance now visible in the numbers.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 11 — Peer comps
+  (i) => `
+  ${slideHeader('Comps', 'Netflix doesn\'t look expensive when you account for growth + margin')}
+  <div class="two-col">
+    <div class="col">
+      <h2>Growth × Margin × Valuation</h2>
+      <div class="chart-wrap" style="height:340px;"><canvas id="ch-comps"></canvas></div>
+      <p class="footnote">Bubble size = EV. X = FY26E revenue growth, Y = FY26E EBIT margin. Multiples shown in table at right.</p>
+    </div>
+    <div class="col">
+      <h2>Peer set</h2>
+      <table class="data">
+        <thead><tr><th>Ticker</th><th>EV ($B)</th><th>FY26 EV/EBIT</th><th>Growth</th><th>EBIT margin</th></tr></thead>
+        <tbody id="peers-table"></tbody>
+      </table>
+      <p class="body-copy" style="margin-top:14px;">Netflix trades at the high end of pure-play streamers and at parity with mega-cap platforms (META, GOOGL) — but it has more upside on operating margin (still going from 30% → 37%+) and a clean optionality lever in WBD. The premium to DIS/WBD/PARA is earned: ~3× their growth and ~2–4× their margin.</p>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 12 — Risks
+  (i) => `
+  ${slideHeader('Risks', 'What could break the thesis')}
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-label">Risk 01 — Operating</div>
+      <h4>Subscriber growth saturates faster than expected</h4>
+      <p>The easy wins (password sharing, U.S. pricing) are done. Incremental subs are international and lower-ARPU. If global net adds slow below 5M/qtr, the operating-leverage story stalls.</p>
+      <div class="signpost">Signpost: international ARPU growth, paid sharing contribution in 10-Q footnotes.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 02 — Engagement</div>
+      <h4>Attention erodes to short-form video</h4>
+      <p>YouTube already has more hours-watched than Netflix in the U.S. Gen Z time spent on long-form is structurally lower. Lower hours → higher churn risk → pricing-power compression.</p>
+      <div class="signpost">Signpost: Nielsen Gauge share of viewing, mgmt commentary on hours-per-sub.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 03 — Deal execution</div>
+      <h4>WBD bid escalates beyond Paramount</h4>
+      <p>The discipline argument is real but untested. Paying $150B-plus would force 3× our modeled debt and could cap multiple expansion for the duration of integration.</p>
+      <div class="signpost">Signpost: any 8-K disclosing revised offer terms; antitrust signals from FTC/DOJ.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 04 — AI / content commoditization</div>
+      <h4>Generative AI floods premium content</h4>
+      <p>Eagle's "atoms vs bits" framing: AI is a deflationary force on bits-businesses. Netflix is the most defensible bits business in media — but it is still a bits business.</p>
+      <div class="signpost">Signpost: cost-of-content trends; emergence of competing distributors leveraging AI to undercut.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 05 — Ad tier</div>
+      <h4>Ad revenue ramps more slowly than the 100% guide</h4>
+      <p>Mgmt guided 2026 ad revenue ~$3B (doubling). Programmatic monetization, fill rates, and CPMs still maturing. A 50% growth print breaks ~$1B of EBIT vs plan.</p>
+      <div class="signpost">Signpost: ad-tier subscriber mix in 10-Q; mgmt commentary on CPMs in earnings calls.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 06 — Regulatory</div>
+      <h4>Antitrust blocks WBD acquisition</h4>
+      <p>Combined NFLX + HBO Max content library could trigger DOJ/FTC scrutiny. Probability low — these are content companies, not distribution monopolies in regulators' working definitions — but tail risk.</p>
+      <div class="signpost">Signpost: HSR filing; second-request communications.</div>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+
+  // 13 — Appendix / sources
+  (i) => `
+  ${slideHeader('Appendix', 'Data provenance and method')}
+  <div class="two-col">
+    <div class="col">
+      <h2>Sources</h2>
+      <ul class="bullets">
+        <li><strong>Financial statements:</strong> Netflix 10-K filings, FY2018–FY2025 (SEC EDGAR accession 0001065280-26-000034 and earlier). Q1 2026 10-Q (accession 0001065280-26-000138).</li>
+        <li><strong>Quantitative extraction:</strong> SEC XBRL <em>companyfacts</em> API for Netflix CIK 0001065280. Tags: <code>Revenues</code>, <code>CostOfRevenue</code>, <code>MarketingExpense</code> / <code>SellingAndMarketingExpense</code>, <code>GeneralAndAdministrativeExpense</code>, <code>ResearchAndDevelopmentExpense</code>, <code>OperatingIncomeLoss</code>.</li>
+        <li><strong>Management guidance:</strong> Q4 2025 shareholder letter (Jan 20, 2026 8-K) and conference-call commentary.</li>
+        <li><strong>Stock split:</strong> 10-for-1 forward split effective Nov 17, 2025 (NFLX press release). All per-share numbers are split-adjusted.</li>
+        <li><strong>Industry framing:</strong> Eagle Capital Q2 2023 investor letter ("distribution is defense"). Ben Thompson, Stratechery archives.</li>
+        <li><strong>Peer multiples:</strong> Mid-May 2026 sell-side consensus rollup; ranges only, not point estimates.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h2>Method notes</h2>
+      <ul class="bullets">
+        <li><strong>All numbers are scripted.</strong> Every metric on every slide comes from <code>scripts/build_model.py</code>, which emits <code>data/deck_data.json</code>. The deck is a thin renderer over that file. No LLM-computed figures.</li>
+        <li><strong>Valuation:</strong> 4-year IRR via FY30E EBIT × 17× forward exit multiple + cumulative FY26–FY28 FCF (80% conversion) − net debt, divided by 4.344B shares. Discounted to $83 current.</li>
+        <li><strong>Scenarios:</strong> Four scenarios with explicit growth / margin / WBD-uplift / financing assumptions. See script for parameters.</li>
+        <li><strong>Sensitivities:</strong> 5×5 grid on exit multiple (13–21×) × FY30 EBIT margin (32–42%).</li>
+        <li><strong>What we did NOT do:</strong> bottoms-up sub forecast, granular ad-CPM model, DCF with full WACC build. These are next iterations.</li>
+      </ul>
+    </div>
+  </div>
+  ${slideFooter(i)}`,
+];
+
+// ============================ CHART INITS ============================
+CHART_INIT[1] = () => {};   // summary slide has no canvas
+
+CHART_INIT[2] = () => {
+  // Football field
+  const targets = [
+    { key: 'wbd_deal_base', label: 'WBD deal — base', cls: 'deal' },
+    { key: 'no_deal_bull',  label: 'No deal — bull',  cls: '' },
+    { key: 'no_deal_base',  label: 'No deal — base',  cls: '' },
+    { key: 'wbd_deal_bear', label: 'WBD deal — bear', cls: 'bear' },
+  ];
+  const max = 160;
+  const min = 50;
+  const cur = 83;
+  const ff = document.getElementById('football');
+  if (!ff) return;
+  ff.innerHTML = '';
+  targets.forEach(t => {
+    const v = D.scenarios[t.key].valuation;
+    const low = Math.min(v.target_price * 0.85, v.target_price);
+    const high = Math.max(v.target_price * 1.05, v.target_price);
+    const px = v.target_price;
+    const pctLow = ((low - min) / (max - min)) * 100;
+    const pctWidth = ((high - low) / (max - min)) * 100;
+    const curPct = ((cur - min) / (max - min)) * 100;
+    const row = document.createElement('div');
+    row.className = 'ff-row';
+    row.innerHTML = `
+      <div class="ff-label">${t.label}</div>
+      <div class="ff-bar-track">
+        <div class="ff-curprice" style="left:${curPct}%;"></div>
+        <div class="ff-bar ${t.cls}" style="left:${pctLow}%; width:${pctWidth}%;">$${px.toFixed(0)}</div>
+      </div>
+      <div class="ff-px">+${(v.upside_pct*100).toFixed(0)}% · IRR ${(v.irr_4yr*100).toFixed(1)}%</div>`;
+    ff.appendChild(row);
+  });
+  // Add x-axis labels
+  const axis = document.createElement('div');
+  axis.style.cssText = 'display:grid;grid-template-columns:200px 1fr 100px;gap:12px;margin-top:12px;font-size:10px;color:var(--gray-500);letter-spacing:1px;text-transform:uppercase;';
+  axis.innerHTML = '<div></div><div style="display:flex;justify-content:space-between;"><span>$50</span><span>$80</span><span>$110</span><span>$140</span><span>$160</span></div><div></div>';
+  ff.appendChild(axis);
+};
+
+CHART_INIT[3] = () => {
+  // Region donut on the "Business" slide
+  const ctx = document.getElementById('ch-region');
+  if (!ctx) return;
+  const seg = D.segments_fy24;
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['UCAN', 'EMEA', 'LATAM', 'APAC'],
+      datasets: [{
+        data: [seg.ucan.revenue, seg.emea.revenue, seg.latam.revenue, seg.apac.revenue],
+        backgroundColor: [C.navy, C.navyLight, C.teal, C.tealLight],
+        borderWidth: 2,
+        borderColor: '#fff',
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right' },
+        tooltip: { callbacks: { label: (c) => `${c.label}: $${(c.parsed/1e9).toFixed(1)}B (${(c.parsed/Object.values(seg).reduce((a,s)=>a+s.revenue,0)*100).toFixed(0)}%)` } }
+      }
+    }
+  });
+};
+
+CHART_INIT[4] = () => {
+  // Subscribers + ARPU by region
+  const seg = D.segments_fy24;
+  const labels = ['UCAN', 'EMEA', 'LATAM', 'APAC'];
+  const subsCtx = document.getElementById('ch-subs');
+  if (subsCtx) new Chart(subsCtx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Paid memberships (M)', data: [seg.ucan.members/1e6, seg.emea.members/1e6, seg.latam.members/1e6, seg.apac.members/1e6], backgroundColor: C.navy, yAxisID: 'y', borderRadius: 3 },
+        { label: 'Revenue ($B)',         data: [seg.ucan.revenue/1e9, seg.emea.revenue/1e9, seg.latam.revenue/1e9, seg.apac.revenue/1e9], backgroundColor: C.teal, yAxisID: 'y2', borderRadius: 3 }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        y:  { title: { display: true, text: 'Members (M)' }, grid: { color: C.gray200 }, position: 'left' },
+        y2: { title: { display: true, text: 'Revenue ($B)' }, grid: { display: false }, position: 'right' },
+        x:  { grid: { display: false } }
+      },
+      plugins: { legend: { position: 'top', align: 'end' } }
+    }
+  });
+  const arpuCtx = document.getElementById('ch-arpu');
+  if (arpuCtx) new Chart(arpuCtx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Average revenue per member ($/month)',
+        data: [seg.ucan.arm, seg.emea.arm, seg.latam.arm, seg.apac.arm],
+        backgroundColor: [C.navy, C.navyLight, C.teal, C.tealLight],
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.parsed.y.toFixed(2) + ' / mo' } } },
+      scales: {
+        y: { title: { display: true, text: '$/month' }, grid: { color: C.gray200 }, ticks: { callback: v => '$'+v } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+};
+
+CHART_INIT[5] = () => {
+  const ctx = document.getElementById('ch-leverage');
+  if (!ctx) return;
+  const h = D.historicals;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: h.map(r => r.fy),
+      datasets: [
+        { label: 'Content cost % rev', data: h.map(r => r.content_cost_pct*100), borderColor: C.navy, backgroundColor: C.navy, yAxisID: 'y' },
+        { label: 'Marketing % rev',    data: h.map(r => r.marketing_pct ? r.marketing_pct*100 : null), borderColor: C.magenta, backgroundColor: C.magenta, yAxisID: 'y' },
+        { label: 'EBIT margin',        data: h.map(r => r.ebit_margin*100), borderColor: C.teal, backgroundColor: C.teal, borderWidth: 3, yAxisID: 'y' },
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        y: { title: { display: true, text: '% of revenue' }, grid: { color: C.gray200 }, ticks: { callback: v => v+'%' } },
+        x: { grid: { display: false } }
+      },
+      plugins: { legend: { position: 'top', align: 'end' } }
+    }
+  });
+};
+
+CHART_INIT[6] = () => {
+  const ctx = document.getElementById('ch-profitshare');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Netflix', 'Disney+', 'WBD/HBO Max', 'Paramount+', 'Peacock'],
+      datasets: [{
+        label: 'Approx. share of streaming OP, 2025E',
+        data: [90, 6, 2, 1, 1],
+        backgroundColor: [C.navy, C.navyLight, C.teal, C.tealLight, C.warm],
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: C.gray200 }, ticks: { callback: v => v+'%' }, max: 100 },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+};
+
+CHART_INIT[7] = () => {
+  const ctx = document.getElementById('ch-history');
+  if (!ctx) return;
+  const h = D.historicals;
+  new Chart(ctx, {
+    data: {
+      labels: h.map(r => r.fy),
+      datasets: [
+        { type: 'bar', label: 'Revenue ($B)', data: h.map(r => r.revenue/1e9), backgroundColor: C.navyLight, yAxisID: 'y' },
+        { type: 'bar', label: 'EBIT ($B)',    data: h.map(r => r.operating_income/1e9), backgroundColor: C.navy, yAxisID: 'y' },
+        { type: 'line', label: 'EBIT margin', data: h.map(r => r.ebit_margin*100), borderColor: C.teal, backgroundColor: C.teal, yAxisID: 'y2', borderWidth: 3 },
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        y: { title: { display: true, text: '$B' }, position: 'left', grid: { color: C.gray200 } },
+        y2: { title: { display: true, text: 'EBIT margin %' }, position: 'right', grid: { display: false }, ticks: { callback: v => v+'%' }, min: 0, max: 40 },
+        x: { grid: { display: false } }
+      },
+      plugins: { legend: { position: 'top', align: 'end' } }
+    }
+  });
+
+  // Hist table
+  const tb = document.getElementById('hist-table');
+  if (tb) {
+    tb.innerHTML = h.map(r => `<tr>
+      <td>FY${r.fy}</td>
+      <td>${(r.revenue/1e9).toFixed(1)}</td>
+      <td>${(r.operating_income/1e9).toFixed(1)}</td>
+      <td>${(r.ebit_margin*100).toFixed(1)}%</td>
+      <td>${(r.content_cost_pct*100).toFixed(1)}%</td>
+      <td>${r.marketing_pct ? (r.marketing_pct*100).toFixed(1)+'%' : '—'}</td>
+      <td>${(r.operating_income*0.80/1e9).toFixed(1)}</td>
+    </tr>`).join('');
+  }
+};
+
+CHART_INIT[8] = () => {
+  const ctx = document.getElementById('ch-fy26');
+  if (!ctx) return;
+  // Compare our base vs guide low / mid / high
+  const base = D.scenarios.no_deal_base.projection[0];
+  const bull = D.scenarios.no_deal_bull.projection[0];
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Guide low', 'Guide mid', 'Guide high', 'Our base', 'Our bull'],
+      datasets: [
+        { label: 'Revenue ($B)', data: [50.7, 51.2, 51.7, base.revenue/1e9, bull.revenue/1e9], backgroundColor: C.navy, yAxisID: 'y' },
+        { type: 'line', label: 'EBIT margin', data: [31.5, 31.5, 31.5, base.ebit_margin*100, bull.ebit_margin*100], borderColor: C.teal, backgroundColor: C.teal, yAxisID: 'y2', borderWidth: 3 }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        y: { title: { display: true, text: 'Revenue ($B)' }, beginAtZero: false, suggestedMin: 48, grid: { color: C.gray200 } },
+        y2: { position: 'right', title: { display: true, text: 'EBIT margin %' }, grid: { display: false }, ticks: { callback: v => v+'%' }, min: 28, max: 36 },
+        x: { grid: { display: false } }
+      },
+      plugins: { legend: { position: 'top', align: 'end' } }
+    }
+  });
+};
+
+CHART_INIT[9] = () => {
+  // WBD content spend chart
+  const ctx = document.getElementById('ch-wbd-spend');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['NFLX FY25\ncontent cash spend', 'NFLX 5-yr\ncontent spend', 'WBD EV at\nParamount-match', 'WBD library\nvalue (NFLX view)'],
+      datasets: [{
+        label: '$B',
+        data: [20.5, 110, 91.2, 91.2],
+        backgroundColor: [C.navy, C.navyLight, C.magenta, C.teal],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '$' + c.parsed.x.toFixed(1) + 'B' } } },
+      scales: {
+        x: { title: { display: true, text: '$B' }, grid: { color: C.gray200 }, ticks: { callback: v => '$' + v + 'B' } },
+        y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+};
+
+CHART_INIT[10] = () => {
+  // Scenario projections bar chart
+  const ctx = document.getElementById('ch-scenarios');
+  if (!ctx) return;
+  const order = ['no_deal_base', 'no_deal_bull', 'wbd_deal_base', 'wbd_deal_bear'];
+  const labels = order.map(k => D.scenarios[k].label);
+  const fy30 = order.map(k => D.scenarios[k].projection.at(-1).ebit / 1e9);
+  const fy30_margin = order.map(k => D.scenarios[k].projection.at(-1).ebit_margin * 100);
+  new Chart(ctx, {
+    data: {
+      labels,
+      datasets: [
+        { type: 'bar', label: 'FY30E EBIT ($B)', data: fy30, backgroundColor: [C.navy, C.navyLight, C.teal, C.magenta], yAxisID: 'y' },
+        { type: 'line', label: 'FY30E EBIT margin', data: fy30_margin, borderColor: C.navyDarkest, backgroundColor: C.navyDarkest, yAxisID: 'y2', borderWidth: 3 }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        y: { title: { display: true, text: 'EBIT ($B)' }, grid: { color: C.gray200 } },
+        y2: { position: 'right', title: { display: true, text: 'Margin %' }, grid: { display: false }, ticks: { callback: v => v+'%' }, min: 30, max: 45 },
+        x: { ticks: { autoSkip: false, maxRotation: 30, minRotation: 0 }, grid: { display: false } }
+      },
+      plugins: { legend: { position: 'top', align: 'end' } }
+    }
+  });
+  // Scenario table
+  const tb = document.getElementById('scenario-table');
+  if (tb) {
+    tb.innerHTML = order.map(k => {
+      const v = D.scenarios[k].valuation;
+      const ebit = D.scenarios[k].projection.at(-1).ebit;
+      return `<tr>
+        <td>${D.scenarios[k].label}</td>
+        <td>${(ebit/1e9).toFixed(1)}</td>
+        <td>$${v.target_price.toFixed(0)}</td>
+        <td>${(v.upside_pct*100).toFixed(0)}%</td>
+        <td>${(v.irr_4yr*100).toFixed(1)}%</td>
+      </tr>`;
+    }).join('');
+  }
+};
+
+CHART_INIT[11] = () => {
+  // Sensitivity heatmap
+  const t = document.getElementById('sens-table');
+  if (!t) return;
+  const s = D.sensitivity;
+  // Build table
+  let html = '<tr><th></th>';
+  s.multiples.forEach(m => html += `<th>${m}× EV/EBIT</th>`);
+  html += '</tr>';
+  s.grid.forEach((row) => {
+    html += `<tr><th>${(row.margin*100).toFixed(0)}% margin</th>`;
+    row.row.forEach((cell) => {
+      const irr = cell.irr * 100;
+      // color scale
+      const r = irr < 0 ? 166 : Math.max(0, 95 - irr*2.5);
+      const g = irr < 0 ? 37 : Math.min(180, 100 + irr*2);
+      const b = irr < 0 ? 110 : Math.min(200, 110 + irr);
+      const bg = `rgb(${r},${g},${b})`;
+      const txt = irr < 0 ? '#fff' : (irr < 8 ? '#fff' : '#fff');
+      html += `<td style="background:${bg}; color:${txt}; font-weight:600;">${irr.toFixed(1)}%</td>`;
+    });
+    html += '</tr>';
+  });
+  t.innerHTML = html;
+};
+
+CHART_INIT[12] = () => {
+  // Comps bubble
+  const ctx = document.getElementById('ch-comps');
+  if (!ctx) return;
+  const peers = D.peers;
+  new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: peers.map(p => ({
+        label: p.ticker,
+        data: [{ x: p.rev_growth_26 * 100, y: p.ebit_margin_26 * 100, r: Math.sqrt(p.ev_b) * 1.2 }],
+        backgroundColor: p.ticker === 'NFLX' ? C.navy : (p.ticker === 'WBD' ? C.magenta : C.tealLight),
+        borderColor: p.ticker === 'NFLX' ? C.navyDarkest : C.gray500,
+        borderWidth: p.ticker === 'NFLX' ? 3 : 1,
+      }))
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        x: { title: { display: true, text: 'FY26E Revenue Growth %' }, grid: { color: C.gray200 }, ticks: { callback: v => v+'%' } },
+        y: { title: { display: true, text: 'FY26E EBIT margin %' }, grid: { color: C.gray200 }, ticks: { callback: v => v+'%' } },
+      },
+      plugins: {
+        legend: { position: 'right' },
+        tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw.x.toFixed(1)}% growth, ${c.raw.y.toFixed(1)}% margin` } }
+      }
+    }
+  });
+  // Peers table
+  const tb = document.getElementById('peers-table');
+  if (tb) {
+    tb.innerHTML = peers.map(p => `<tr ${p.ticker==='NFLX'?'class="highlight"':''}>
+      <td>${p.ticker}</td>
+      <td>${p.ev_b.toFixed(0)}</td>
+      <td>${p.ev_ebit_26.toFixed(1)}×</td>
+      <td>${(p.rev_growth_26*100).toFixed(1)}%</td>
+      <td>${(p.ebit_margin_26*100).toFixed(1)}%</td>
+    </tr>`).join('');
+  }
+};
+
+// ============================ NAV ============================
+let cur = 0;
+function show(idx) {
+  cur = Math.max(0, Math.min(SLIDES.length - 1, idx));
+  document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === cur));
+  document.getElementById('cur').textContent = cur + 1;
+}
+document.getElementById('next').addEventListener('click', () => show(cur+1));
+document.getElementById('prev').addEventListener('click', () => show(cur-1));
+document.addEventListener('keydown', (e) => {
+  if (['ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); show(cur+1); }
+  if (['ArrowLeft','PageUp'].includes(e.key))       { e.preventDefault(); show(cur-1); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End')  show(SLIDES.length-1);
+});
+
+load();
+</script>
+</body>
+</html>

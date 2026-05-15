@@ -1,0 +1,777 @@
+{
+  "as_of": "2026-05-15",
+  "ticker": "NFLX",
+  "current_price": 83.0,
+  "shares_out": 4344000000.0,
+  "existing_net_debt": 7908000000.0,
+  "fy25_actual": {
+    "revenue": 45180000000.0,
+    "ebit_margin": 0.295,
+    "ebit": 13328000000.0
+  },
+  "historicals": [
+    {
+      "fy": 2018,
+      "revenue": 15794341000,
+      "cost_of_revenue": 9967538000,
+      "marketing": 2369469000,
+      "ga": 630294000,
+      "rd": 1218000000,
+      "operating_income": 1605226000,
+      "net_income": 1211242000,
+      "long_term_debt": 10360058000,
+      "cash": 3812041000,
+      "equity": 5238765000,
+      "total_assets": 25974400000,
+      "ebit_margin": 0.10163298361102878,
+      "content_cost_pct": 0.6310828669584885,
+      "marketing_pct": 0.1500201242964173
+    },
+    {
+      "fy": 2019,
+      "revenue": 20156447000,
+      "cost_of_revenue": 12440213000,
+      "marketing": 2652462000,
+      "ga": 914369000,
+      "rd": 1673000000,
+      "operating_income": 2604254000,
+      "net_income": 1866916000,
+      "long_term_debt": 14759260000,
+      "cash": 5043786000,
+      "equity": 7582157000,
+      "total_assets": 33975712000,
+      "ebit_margin": 0.12920203645017397,
+      "content_cost_pct": 0.6171828298906052,
+      "marketing_pct": 0.1315937278033177
+    },
+    {
+      "fy": 2020,
+      "revenue": 24996056000,
+      "cost_of_revenue": 15276319000,
+      "marketing": 2228362000,
+      "ga": 1076486000,
+      "rd": 1829600000,
+      "operating_income": 4585289000,
+      "net_income": 2761395000,
+      "long_term_debt": 15809095000,
+      "cash": 8238870000,
+      "equity": 11065240000,
+      "total_assets": 39280359000,
+      "ebit_margin": 0.18344049957321268,
+      "content_cost_pct": 0.6111491748938312,
+      "marketing_pct": 0.08914854407431316
+    },
+    {
+      "fy": 2021,
+      "revenue": 29697844000,
+      "cost_of_revenue": 17332683000,
+      "marketing": 2545146000,
+      "ga": 1351621000,
+      "rd": 2273885000,
+      "operating_income": 6194509000,
+      "net_income": 5116228000,
+      "long_term_debt": 14693072000,
+      "cash": 6055111000,
+      "equity": 15849248000,
+      "total_assets": 44584663000,
+      "ebit_margin": 0.20858446828665408,
+      "content_cost_pct": 0.5836343877353521,
+      "marketing_pct": 0.0857013727999918
+    },
+    {
+      "fy": 2022,
+      "revenue": 31615550000,
+      "cost_of_revenue": 19168285000,
+      "marketing": 2530502000,
+      "ga": 1572891000,
+      "rd": 2711041000,
+      "operating_income": 5632831000,
+      "net_income": 4491924000,
+      "long_term_debt": 14353076000,
+      "cash": 5170582000,
+      "equity": 20777401000,
+      "total_assets": 48594768000,
+      "ebit_margin": 0.17816647187855345,
+      "content_cost_pct": 0.6062929476159674,
+      "marketing_pct": 0.08003979054610785
+    },
+    {
+      "fy": 2023,
+      "revenue": 33723297000,
+      "cost_of_revenue": 19715368000,
+      "marketing": 2657883000,
+      "ga": 1720285000,
+      "rd": 2675758000,
+      "operating_income": 6954003000,
+      "net_income": 5407990000,
+      "long_term_debt": 14143417000,
+      "cash": 7118515000,
+      "equity": 20588313000,
+      "total_assets": 48731992000,
+      "ebit_margin": 0.2062076848535895,
+      "content_cost_pct": 0.5846216044653048,
+      "marketing_pct": 0.07881444687925976
+    },
+    {
+      "fy": 2024,
+      "revenue": 39000966000,
+      "cost_of_revenue": 21038464000,
+      "marketing": 2917554000,
+      "ga": 1702039000,
+      "rd": 2925295000,
+      "operating_income": 10417614000,
+      "net_income": 8711631000,
+      "long_term_debt": 13798351000,
+      "cash": 7807337000,
+      "equity": 24743567000,
+      "total_assets": 53630374000,
+      "ebit_margin": 0.26711169154117875,
+      "content_cost_pct": 0.5394344334958268,
+      "marketing_pct": 0.07480722400568232
+    },
+    {
+      "fy": 2025,
+      "revenue": 45183036000,
+      "cost_of_revenue": 23275329000,
+      "marketing": 3301306000,
+      "ga": 1888408000,
+      "rd": 3391390000,
+      "operating_income": 13326603000,
+      "net_income": 10981201000,
+      "long_term_debt": 13463971000,
+      "cash": 9039194000,
+      "equity": 26615488000,
+      "total_assets": 55596993000,
+      "ebit_margin": 0.29494704605507255,
+      "content_cost_pct": 0.5151342419752405,
+      "marketing_pct": 0.07306516543067182
+    }
+  ],
+  "segments_fy24": {
+    "ucan": {
+      "revenue": 17359000000.0,
+      "members": 89600000.0,
+      "arm": 17.26
+    },
+    "emea": {
+      "revenue": 13693000000.0,
+      "members": 101000000.0,
+      "arm": 11.39
+    },
+    "latam": {
+      "revenue": 4886000000.0,
+      "members": 53300000.0,
+      "arm": 7.69
+    },
+    "apac": {
+      "revenue": 4061000000.0,
+      "members": 57500000.0,
+      "arm": 7.31
+    }
+  },
+  "fy25_summary": {
+    "total_revenue": 45180000000.0,
+    "total_paid_memberships_est": 325000000.0
+  },
+  "scenarios": {
+    "no_deal_base": {
+      "label": "No deal \u2014 base case",
+      "extra_debt": 0,
+      "projection": [
+        {
+          "fy": 2026,
+          "revenue": 51279300000.0,
+          "core_revenue": 51279300000.0,
+          "uplift_revenue": 0.0,
+          "ebit": 16152979500.0,
+          "core_ebit": 16152979500.0,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.315,
+          "growth": 0.135
+        },
+        {
+          "fy": 2027,
+          "revenue": 57689212500.0,
+          "core_revenue": 57689212500.0,
+          "uplift_revenue": 0.0,
+          "ebit": 19325886187.5,
+          "core_ebit": 19325886187.5,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.335,
+          "growth": 0.125
+        },
+        {
+          "fy": 2028,
+          "revenue": 64323471937.5,
+          "core_revenue": 64323471937.5,
+          "uplift_revenue": 0.0,
+          "ebit": 22513215178.125,
+          "core_ebit": 22513215178.125,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.35,
+          "growth": 0.11499999999999999
+        },
+        {
+          "fy": 2029,
+          "revenue": 71077436490.9375,
+          "core_revenue": 71077436490.9375,
+          "uplift_revenue": 0.0,
+          "ebit": 25587877136.7375,
+          "core_ebit": 25587877136.7375,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.36,
+          "growth": 0.10499999999999998
+        },
+        {
+          "fy": 2030,
+          "revenue": 77829792957.57655,
+          "core_revenue": 77829792957.57655,
+          "uplift_revenue": 0.0,
+          "ebit": 28797023394.303326,
+          "core_ebit": 28797023394.303326,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.37,
+          "growth": 0.09499999999999997
+        }
+      ],
+      "valuation": {
+        "scenario": "no_deal_base",
+        "label": "No deal \u2014 base case",
+        "exit_ebit": 28797023394.303326,
+        "exit_ev": 489549397703.15656,
+        "interim_fcf": 46393664692.5,
+        "debt": 7908000000.0,
+        "equity_value": 528035062395.65656,
+        "target_price": 121.55503277984727,
+        "current_price": 83.0,
+        "upside_pct": 0.46451846722707546,
+        "irr_4yr": 0.10007859173222866
+      }
+    },
+    "no_deal_bull": {
+      "label": "No deal \u2014 bull case",
+      "extra_debt": 0,
+      "projection": [
+        {
+          "fy": 2026,
+          "revenue": 51505200000.00001,
+          "core_revenue": 51505200000.00001,
+          "uplift_revenue": 0.0,
+          "ebit": 16481664000.000002,
+          "core_ebit": 16481664000.000002,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.32,
+          "growth": 0.14000000000000012
+        },
+        {
+          "fy": 2027,
+          "revenue": 58715928000.000015,
+          "core_revenue": 58715928000.000015,
+          "uplift_revenue": 0.0,
+          "ebit": 20256995160.000004,
+          "core_ebit": 20256995160.000004,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.345,
+          "growth": 0.14000000000000012
+        },
+        {
+          "fy": 2028,
+          "revenue": 66348998640.00001,
+          "core_revenue": 66348998640.00001,
+          "uplift_revenue": 0.0,
+          "ebit": 24217384503.600002,
+          "core_ebit": 24217384503.600002,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.365,
+          "growth": 0.1299999999999999
+        },
+        {
+          "fy": 2029,
+          "revenue": 74310878476.80002,
+          "core_revenue": 74310878476.80002,
+          "uplift_revenue": 0.0,
+          "ebit": 28238133821.184006,
+          "core_ebit": 28238133821.184006,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.38,
+          "growth": 0.1200000000000001
+        },
+        {
+          "fy": 2030,
+          "revenue": 82485075109.24803,
+          "core_revenue": 82485075109.24803,
+          "uplift_revenue": 0.0,
+          "ebit": 32581604668.152973,
+          "core_ebit": 32581604668.152973,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.395,
+          "growth": 0.1100000000000001
+        }
+      ],
+      "valuation": {
+        "scenario": "no_deal_bull",
+        "label": "No deal \u2014 bull case",
+        "exit_ebit": 32581604668.152973,
+        "exit_ev": 553887279358.6006,
+        "interim_fcf": 48764834930.880005,
+        "debt": 7908000000.0,
+        "equity_value": 594744114289.4806,
+        "target_price": 136.91162851967786,
+        "current_price": 83.0,
+        "upside_pct": 0.6495376930081671,
+        "irr_4yr": 0.13328870660003211
+      }
+    },
+    "wbd_deal_base": {
+      "label": "WBD deal at Paramount-match terms",
+      "extra_debt": 71200000000.0,
+      "projection": [
+        {
+          "fy": 2026,
+          "revenue": 51279300000.0,
+          "core_revenue": 51279300000.0,
+          "uplift_revenue": 0.0,
+          "ebit": 15896583000.0,
+          "core_ebit": 15896583000.0,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.31,
+          "growth": 0.135
+        },
+        {
+          "fy": 2027,
+          "revenue": 57689212500.0,
+          "core_revenue": 57689212500.0,
+          "uplift_revenue": 0.0,
+          "ebit": 19037440125.0,
+          "core_ebit": 19037440125.0,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.33,
+          "growth": 0.125
+        },
+        {
+          "fy": 2028,
+          "revenue": 70755819131.25,
+          "core_revenue": 64323471937.5,
+          "uplift_revenue": 6432347193.75,
+          "ebit": 28816915428.0,
+          "core_ebit": 22513215178.125,
+          "uplift_ebit": 6303700249.875,
+          "ebit_margin": 0.4072727272727273,
+          "growth": 0.22649999999999992
+        },
+        {
+          "fy": 2029,
+          "revenue": 78185180140.03125,
+          "core_revenue": 71077436490.9375,
+          "uplift_revenue": 7107743649.09375,
+          "ebit": 32908853095.30406,
+          "core_ebit": 25943264319.19219,
+          "uplift_ebit": 6965588776.111875,
+          "ebit_margin": 0.4209090909090909,
+          "growth": 0.10499999999999998
+        },
+        {
+          "fy": 2030,
+          "revenue": 85612772253.33421,
+          "core_revenue": 77829792957.57655,
+          "uplift_revenue": 7782979295.757656,
+          "ebit": 37202641033.72159,
+          "core_ebit": 29575321323.87909,
+          "uplift_ebit": 7627319709.842503,
+          "ebit_margin": 0.43454545454545446,
+          "growth": 0.09499999999999997
+        }
+      ],
+      "valuation": {
+        "scenario": "wbd_deal_base",
+        "label": "WBD deal at Paramount-match terms",
+        "exit_ebit": 37202641033.72159,
+        "exit_ev": 632444897573.267,
+        "interim_fcf": 51000750842.4,
+        "debt": 79108000000.0,
+        "equity_value": 604337648415.667,
+        "target_price": 139.12008481023642,
+        "current_price": 83.0,
+        "upside_pct": 0.6761456001233304,
+        "irr_4yr": 0.13783145449788647
+      }
+    },
+    "wbd_deal_bear": {
+      "label": "WBD deal \u2014 integration drag",
+      "extra_debt": 91200000000.0,
+      "projection": [
+        {
+          "fy": 2026,
+          "revenue": 50827500000.0,
+          "core_revenue": 50827500000.0,
+          "uplift_revenue": 0.0,
+          "ebit": 14739974999.999998,
+          "core_ebit": 14739974999.999998,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.29,
+          "growth": 0.125
+        },
+        {
+          "fy": 2027,
+          "revenue": 56672662500.0,
+          "core_revenue": 56672662500.0,
+          "uplift_revenue": 0.0,
+          "ebit": 17285162062.5,
+          "core_ebit": 17285162062.5,
+          "uplift_ebit": 0.0,
+          "ebit_margin": 0.305,
+          "growth": 0.11499999999999999
+        },
+        {
+          "fy": 2028,
+          "revenue": 65754456665.625,
+          "core_revenue": 62623292062.5,
+          "uplift_revenue": 3131164603.125,
+          "ebit": 23014059832.96875,
+          "core_ebit": 20352569920.3125,
+          "uplift_ebit": 2661489912.65625,
+          "ebit_margin": 0.35,
+          "growth": 0.16025
+        },
+        {
+          "fy": 2029,
+          "revenue": 72001130048.85938,
+          "core_revenue": 68572504808.4375,
+          "uplift_revenue": 3428625240.421875,
+          "ebit": 26571845613.269527,
+          "core_ebit": 23657514158.910934,
+          "uplift_ebit": 2914331454.3585935,
+          "ebit_margin": 0.369047619047619,
+          "growth": 0.09499999999999997
+        },
+        {
+          "fy": 2030,
+          "revenue": 78121226103.0124,
+          "core_revenue": 74401167717.15468,
+          "uplift_revenue": 3720058385.857734,
+          "ebit": 29946470006.154755,
+          "core_ebit": 26784420378.175682,
+          "uplift_ebit": 3162049627.979074,
+          "ebit_margin": 0.3833333333333333,
+          "growth": 0.08499999999999974
+        }
+      ],
+      "valuation": {
+        "scenario": "wbd_deal_bear",
+        "label": "WBD deal \u2014 integration drag",
+        "exit_ebit": 29946470006.154755,
+        "exit_ev": 509089990104.63086,
+        "interim_fcf": 44031357516.375,
+        "debt": 99108000000.0,
+        "equity_value": 454013347621.00586,
+        "target_price": 104.5150431908393,
+        "current_price": 83.0,
+        "upside_pct": 0.2592173878414372,
+        "irr_4yr": 0.059315136643393274
+      }
+    }
+  },
+  "sensitivity": {
+    "multiples": [
+      13,
+      15,
+      17,
+      19,
+      21
+    ],
+    "margins": [
+      0.32,
+      0.35,
+      0.38,
+      0.4,
+      0.42
+    ],
+    "grid": [
+      {
+        "margin": 0.32,
+        "row": [
+          {
+            "px": 91.90651091534768,
+            "irr": 0.025810279334502972,
+            "ev": 356149132573.8703
+          },
+          {
+            "px": 104.51981069484444,
+            "irr": 0.0593272167292247,
+            "ev": 410941306816.0042
+          },
+          {
+            "px": 117.1331104743412,
+            "irr": 0.08993449071037296,
+            "ev": 465733481058.1381
+          },
+          {
+            "px": 129.74641025383795,
+            "irr": 0.11816093323112975,
+            "ev": 520525655300.27203
+          },
+          {
+            "px": 142.3597100333347,
+            "irr": 0.14439842279276482,
+            "ev": 575317829542.4059
+          }
+        ]
+      },
+      {
+        "margin": 0.35,
+        "row": [
+          {
+            "px": 99.59274046847851,
+            "irr": 0.046616067382894144,
+            "ev": 389538113752.67065
+          },
+          {
+            "px": 113.38853710230309,
+            "irr": 0.08111717053614176,
+            "ev": 449467054330.0046
+          },
+          {
+            "px": 127.18433373612766,
+            "irr": 0.11259955452513393,
+            "ev": 509395994907.33856
+          },
+          {
+            "px": 140.98013036995224,
+            "irr": 0.14161575549228744,
+            "ev": 569324935484.6725
+          },
+          {
+            "px": 154.77592700377681,
+            "irr": 0.16857429879589447,
+            "ev": 629253876062.0065
+          }
+        ]
+      },
+      {
+        "margin": 0.38,
+        "row": [
+          {
+            "px": 107.27897002160935,
+            "irr": 0.06625020018663363,
+            "ev": 422927094931.471
+          },
+          {
+            "px": 122.25726350976174,
+            "irr": 0.10166396633734864,
+            "ev": 487992801844.005
+          },
+          {
+            "px": 137.23555699791416,
+            "irr": 0.13395844376899557,
+            "ev": 553058508756.5391
+          },
+          {
+            "px": 152.21385048606655,
+            "irr": 0.1637080001282638,
+            "ev": 618124215669.073
+          },
+          {
+            "px": 167.19214397421894,
+            "irr": 0.19133648848660312,
+            "ev": 683189922581.607
+          }
+        ]
+      },
+      {
+        "margin": 0.4,
+        "row": [
+          {
+            "px": 112.40312305702992,
+            "irr": 0.0787605882043243,
+            "ev": 445186415717.33795
+          },
+          {
+            "px": 128.16974778140084,
+            "irr": 0.11474840423572008,
+            "ev": 513676633520.0053
+          },
+          {
+            "px": 143.9363725057718,
+            "irr": 0.14755395807334604,
+            "ev": 582166851322.6727
+          },
+          {
+            "px": 159.70299723014276,
+            "irr": 0.17776526984396246,
+            "ev": 650657069125.3401
+          },
+          {
+            "px": 175.46962195451368,
+            "irr": 0.20581577726002598,
+            "ev": 719147286928.0074
+          }
+        ]
+      },
+      {
+        "margin": 0.42,
+        "row": [
+          {
+            "px": 117.52727609245046,
+            "irr": 0.09085027281655811,
+            "ev": 467445736503.2048
+          },
+          {
+            "px": 134.08223205303995,
+            "irr": 0.12738768020958768,
+            "ev": 539360465196.0055
+          },
+          {
+            "px": 150.63718801362944,
+            "irr": 0.16068274164462837,
+            "ev": 611275193888.8063
+          },
+          {
+            "px": 167.1921439742189,
+            "irr": 0.19133648848660312,
+            "ev": 683189922581.6069
+          },
+          {
+            "px": 183.7470999348084,
+            "irr": 0.21979149313934498,
+            "ev": 755104651274.4077
+          }
+        ]
+      }
+    ]
+  },
+  "peers": [
+    {
+      "ticker": "NFLX",
+      "name": "Netflix",
+      "mkt_cap_b": 360.5,
+      "ev_b": 368.4,
+      "ev_ebit_26": 22.6,
+      "ev_ebit_27": 18.8,
+      "rev_growth_26": 0.135,
+      "ebit_margin_26": 0.315,
+      "fcf_yield_26": 0.03
+    },
+    {
+      "ticker": "DIS",
+      "name": "Disney",
+      "mkt_cap_b": 173.0,
+      "ev_b": 213.0,
+      "ev_ebit_26": 13.5,
+      "ev_ebit_27": 12.0,
+      "rev_growth_26": 0.04,
+      "ebit_margin_26": 0.155,
+      "fcf_yield_26": 0.06
+    },
+    {
+      "ticker": "WBD",
+      "name": "Warner Bros Discovery",
+      "mkt_cap_b": 79.0,
+      "ev_b": 116.0,
+      "ev_ebit_26": 11.5,
+      "ev_ebit_27": 10.0,
+      "rev_growth_26": 0.005,
+      "ebit_margin_26": 0.09,
+      "fcf_yield_26": 0.05
+    },
+    {
+      "ticker": "PARA",
+      "name": "Paramount",
+      "mkt_cap_b": 19.5,
+      "ev_b": 33.0,
+      "ev_ebit_26": 14.0,
+      "ev_ebit_27": 11.5,
+      "rev_growth_26": -0.02,
+      "ebit_margin_26": 0.07,
+      "fcf_yield_26": 0.04
+    },
+    {
+      "ticker": "SPOT",
+      "name": "Spotify",
+      "mkt_cap_b": 130.0,
+      "ev_b": 126.0,
+      "ev_ebit_26": 27.0,
+      "ev_ebit_27": 21.0,
+      "rev_growth_26": 0.145,
+      "ebit_margin_26": 0.135,
+      "fcf_yield_26": 0.025
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet (YouTube)",
+      "mkt_cap_b": 2200.0,
+      "ev_b": 2150.0,
+      "ev_ebit_26": 17.5,
+      "ev_ebit_27": 15.0,
+      "rev_growth_26": 0.11,
+      "ebit_margin_26": 0.32,
+      "fcf_yield_26": 0.04
+    },
+    {
+      "ticker": "META",
+      "name": "Meta",
+      "mkt_cap_b": 1500.0,
+      "ev_b": 1475.0,
+      "ev_ebit_26": 14.5,
+      "ev_ebit_27": 12.5,
+      "rev_growth_26": 0.165,
+      "ebit_margin_26": 0.42,
+      "fcf_yield_26": 0.045
+    }
+  ],
+  "operating_leverage": [
+    {
+      "fy": 2018,
+      "content_pct": 0.6310828669584885,
+      "mkt_pct": 0.1500201242964173,
+      "ebit_margin": 0.10163298361102878
+    },
+    {
+      "fy": 2019,
+      "content_pct": 0.6171828298906052,
+      "mkt_pct": 0.1315937278033177,
+      "ebit_margin": 0.12920203645017397
+    },
+    {
+      "fy": 2020,
+      "content_pct": 0.6111491748938312,
+      "mkt_pct": 0.08914854407431316,
+      "ebit_margin": 0.18344049957321268
+    },
+    {
+      "fy": 2021,
+      "content_pct": 0.5836343877353521,
+      "mkt_pct": 0.0857013727999918,
+      "ebit_margin": 0.20858446828665408
+    },
+    {
+      "fy": 2022,
+      "content_pct": 0.6062929476159674,
+      "mkt_pct": 0.08003979054610785,
+      "ebit_margin": 0.17816647187855345
+    },
+    {
+      "fy": 2023,
+      "content_pct": 0.5846216044653048,
+      "mkt_pct": 0.07881444687925976,
+      "ebit_margin": 0.2062076848535895
+    },
+    {
+      "fy": 2024,
+      "content_pct": 0.5394344334958268,
+      "mkt_pct": 0.07480722400568232,
+      "ebit_margin": 0.26711169154117875
+    },
+    {
+      "fy": 2025,
+      "content_pct": 0.5151342419752405,
+      "mkt_pct": 0.07306516543067182,
+      "ebit_margin": 0.29494704605507255
+    }
+  ],
+  "assumptions": {
+    "exit_multiple_fwd_ev_ebit": 17.0,
+    "ebit_to_fcf": 0.8,
+    "wbd_pricing_uplift_base": 0.1,
+    "wbd_drop_through": 0.98
+  }
+}

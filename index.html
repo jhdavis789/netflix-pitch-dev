@@ -37,12 +37,31 @@
     height: 100%;
     font-family: var(--font-body);
     color: var(--ink);
-    background: var(--gray-100);
+    background: #eef0f3;                /* letterbox area on wide screens */
     overflow: hidden;
   }
   body { line-height: 1.45; }
 
-  .deck { position: relative; height: 100vh; width: 100vw; overflow: hidden; }
+  /* The stage centers the fixed-size deck and creates whitespace on wide screens */
+  .stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  /* Fixed design size — everything inside is laid out for a 1440×900 canvas. */
+  .deck {
+    position: relative;
+    width: 1440px;
+    height: 900px;
+    background: #fff;
+    box-shadow: 0 8px 40px rgba(0,41,75,0.18);
+    overflow: hidden;
+    transform-origin: center center;
+    flex-shrink: 0;
+  }
   .slide {
     position: absolute;
     inset: 0;
@@ -507,7 +526,7 @@
 </style>
 </head>
 <body>
-<div class="deck" id="deck"></div>
+<div class="stage"><div class="deck" id="deck"></div></div>
 <div class="nav-controls">
   <button id="prev">‹</button>
   <span class="counter"><span id="cur">1</span> / <span id="total">14</span></span>
@@ -1340,7 +1359,22 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'End')  show(SLIDES.length-1);
 });
 
-load().then(() => jumpFromHash());
+// Fit the fixed 1440x900 deck to the viewport. The stage stays full-screen;
+// the deck scales down on smaller viewports and is centered with whitespace
+// (letterbox) on wider monitors. We never UPSCALE past 1 — a 4K monitor sees
+// a sharp 1440x900 deck with whitespace around it.
+function fitDeck() {
+  const deck = document.getElementById('deck');
+  if (!deck) return;
+  const margin = 24;  // gap to viewport edges
+  const sx = (window.innerWidth - margin * 2) / 1440;
+  const sy = (window.innerHeight - margin * 2) / 900;
+  const s = Math.min(sx, sy, 1);
+  deck.style.transform = `scale(${s})`;
+}
+window.addEventListener('resize', fitDeck);
+
+load().then(() => { fitDeck(); jumpFromHash(); });
 window.addEventListener('hashchange', jumpFromHash);
 </script>
 </body>

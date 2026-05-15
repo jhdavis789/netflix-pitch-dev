@@ -551,6 +551,7 @@ async function load() {
   const r = await fetch('data/deck_data.json');
   D = await r.json();
   renderAll();
+  return D;
 }
 
 function renderAll() {
@@ -1320,6 +1321,15 @@ function show(idx) {
   cur = Math.max(0, Math.min(SLIDES.length - 1, idx));
   document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === cur));
   document.getElementById('cur').textContent = cur + 1;
+  // keep cover styling on slide 0 even if it lost the class somehow
+  const s0 = document.getElementById('slide-0');
+  if (s0 && cur === 0) s0.classList.add('cover');
+  history.replaceState(null, '', '#' + cur);
+}
+// jump to slide from URL hash if present
+function jumpFromHash() {
+  const h = parseInt((location.hash || '').slice(1), 10);
+  if (!isNaN(h) && h >= 0 && h < SLIDES.length) show(h);
 }
 document.getElementById('next').addEventListener('click', () => show(cur+1));
 document.getElementById('prev').addEventListener('click', () => show(cur-1));
@@ -1330,7 +1340,8 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'End')  show(SLIDES.length-1);
 });
 
-load();
+load().then(() => jumpFromHash());
+window.addEventListener('hashchange', jumpFromHash);
 </script>
 </body>
 </html>

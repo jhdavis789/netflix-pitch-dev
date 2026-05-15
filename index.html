@@ -492,7 +492,7 @@
     z-index: 5;
   }
   .ff-curprice::after {
-    content: 'Current $83';
+    content: attr(data-label);
     position: absolute;
     top: -16px;
     left: 6px;
@@ -607,7 +607,7 @@ const SLIDES = [
       <div class="thesis-pull">"Internet distribution is more scalable than content." With 325M paid memberships and ~1B global viewers, Netflix has locked the distribution channel — and operating leverage is doing the rest.</div>
       <div class="pillars">
         <div class="pillar"><div class="pillar-num">01</div><h4>Dominant distribution moat</h4><p>~90% of profits among scaled streamers. ARPU pricing power proven (~+10% in U.S.). Lowest churn in the category.</p></div>
-        <div class="pillar"><div class="pillar-num">02</div><h4>Compounding operating leverage</h4><p>Content costs fell from 63% → 51% of revenue and marketing from 15% → 7% since 2018. EBIT margin tripled to 29.5%.</p></div>
+        <div class="pillar"><div class="pillar-num">02</div><h4>Compounding operating leverage</h4><p>Content costs fell from 63% → 52% of revenue and marketing from 15% → 7% since 2018. EBIT margin tripled to 29.5%.</p></div>
         <div class="pillar"><div class="pillar-num">03</div><h4>Optionality on WBD</h4><p>If walked away — buybacks restart. If acquired at Paramount-match terms — a $91B content library at ~10–11× incremental EBIT after a 10% bundle price uplift.</p></div>
         <div class="pillar"><div class="pillar-num">04</div><h4>Underwriting at current price</h4><p>At ~22.6× FY26 EV/EBIT, the market is paying for dominance but not for the WBD optionality and not for the ad-tier doubling.</p></div>
       </div>
@@ -616,19 +616,20 @@ const SLIDES = [
     <div>
       <div class="metrics-card">
         <h3>At-a-glance</h3>
-        <div class="metric-row"><span class="lbl">Price (May 2026)</span><span class="val">$83.00</span></div>
-        <div class="metric-row"><span class="lbl">Market cap</span><span class="val">$360 B</span></div>
-        <div class="metric-row"><span class="lbl">Net debt</span><span class="val">$7.9 B</span></div>
-        <div class="metric-row"><span class="lbl">FY25A revenue</span><span class="val">$45.2 B</span></div>
-        <div class="metric-row"><span class="lbl">FY25A EBIT</span><span class="val">$13.3 B</span></div>
-        <div class="metric-row"><span class="lbl">FY25A EBIT margin</span><span class="val pos">29.5%</span></div>
-        <div class="metric-row"><span class="lbl">FY26E EBIT (guide)</span><span class="val">$16.3 B</span></div>
-        <div class="metric-row"><span class="lbl">FY26E EV / EBIT</span><span class="val">22.6×</span></div>
+        <div class="metric-row"><span class="lbl">Price (May 2026)</span><span class="val" id="m-price">—</span></div>
+        <div class="metric-row"><span class="lbl">Shares outstanding</span><span class="val" id="m-shares">—</span></div>
+        <div class="metric-row"><span class="lbl">Market cap</span><span class="val" id="m-mcap">—</span></div>
+        <div class="metric-row"><span class="lbl">Net debt</span><span class="val" id="m-netdebt">—</span></div>
+        <div class="metric-row"><span class="lbl">FY25A revenue</span><span class="val" id="m-fy25rev">—</span></div>
+        <div class="metric-row"><span class="lbl">FY25A EBIT</span><span class="val" id="m-fy25ebit">—</span></div>
+        <div class="metric-row"><span class="lbl">FY25A EBIT margin</span><span class="val pos" id="m-fy25mgn">—</span></div>
+        <div class="metric-row"><span class="lbl">FY26E EBIT (our base)</span><span class="val" id="m-fy26ebit">—</span></div>
+        <div class="metric-row"><span class="lbl">FY26E EV / EBIT</span><span class="val" id="m-fy26evebit">—</span></div>
       </div>
       <div class="reco-box">
         <div class="reco-label">Recommendation</div>
         <div class="reco-action">BUY</div>
-        <div class="reco-meta">Base case target: <strong style="color:white;">$122</strong> (no deal) / <strong style="color:white;">$139</strong> (WBD deal at Paramount terms) — 4-yr IRR 10–14%</div>
+        <div class="reco-meta" id="m-reco-meta">—</div>
       </div>
     </div>
   </div>
@@ -676,7 +677,7 @@ const SLIDES = [
     <div class="col">
       <h2>ARPU per region (FY24 ARM, $/month)</h2>
       <div class="chart-wrap" style="height:300px;"><canvas id="ch-arpu"></canvas></div>
-      <p class="body-copy"><strong>The dollar story:</strong> UCAN has 30% of subs but 43% of revenue ($17.4B). EMEA has 33% of subs (101M) at 66% of UCAN's ARPU — the largest pool of remaining pricing power. APAC and LATAM are the volume engine; pricing follows scale.</p>
+      <p class="body-copy"><strong>The dollar story:</strong> UCAN has 30% of subs but 45% of FY24 revenue ($17.4B). EMEA has 34% of subs (101M) at 64% of UCAN's ARPU — the largest pool of remaining pricing power. APAC and LATAM are the volume engine; pricing follows scale.</p>
       <p class="body-copy" style="margin-top:14px;"><strong>Why this matters for WBD:</strong> WBD's HBO Max library raises perceived bundle value most where ARPU is highest (UCAN). A 10% U.S. price rise is ~$2/month — and U.S. has demonstrated tolerance for 4 price increases in 5 years.</p>
     </div>
   </div>
@@ -917,7 +918,30 @@ const SLIDES = [
 ];
 
 // ============================ CHART INITS ============================
-CHART_INIT[1] = () => {};   // summary slide has no canvas
+CHART_INIT[1] = () => {
+  // Bind the metrics card and recommendation row to deck_data.json
+  const h = D.historicals;
+  const fy25 = h[h.length - 1];
+  const fy26 = D.scenarios.no_deal_base.projection[0];
+  const fy26ev = (D.current_price * D.shares_out + D.existing_net_debt) / fy26.ebit;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('m-price',     '$' + D.current_price.toFixed(2));
+  set('m-shares',    (D.shares_out/1e9).toFixed(2) + ' B');
+  set('m-mcap',      '$' + (D.market_cap_b).toFixed(0) + ' B');
+  set('m-netdebt',   '$' + (D.existing_net_debt/1e9).toFixed(1) + ' B');
+  set('m-fy25rev',   '$' + (fy25.revenue/1e9).toFixed(1) + ' B');
+  set('m-fy25ebit',  '$' + (fy25.operating_income/1e9).toFixed(1) + ' B');
+  set('m-fy25mgn',   (fy25.ebit_margin*100).toFixed(1) + '%');
+  set('m-fy26ebit',  '$' + (fy26.ebit/1e9).toFixed(1) + ' B');
+  set('m-fy26evebit', fy26ev.toFixed(1) + '×');
+  const noDeal = D.scenarios.no_deal_base.valuation;
+  const wbd    = D.scenarios.wbd_deal_base.valuation;
+  const reco = document.getElementById('m-reco-meta');
+  if (reco) reco.innerHTML =
+    `Base case target: <strong style="color:white;">$${noDeal.target_price.toFixed(0)}</strong> (no deal) / ` +
+    `<strong style="color:white;">$${wbd.target_price.toFixed(0)}</strong> (WBD deal at Paramount terms) — ` +
+    `4-yr IRR ${(noDeal.irr_4yr*100).toFixed(0)}–${(wbd.irr_4yr*100).toFixed(0)}%`;
+};
 
 CHART_INIT[2] = () => {
   // Football field
@@ -929,7 +953,7 @@ CHART_INIT[2] = () => {
   ];
   const max = 160;
   const min = 50;
-  const cur = 83;
+  const cur = D.current_price;
   const ff = document.getElementById('football');
   if (!ff) return;
   ff.innerHTML = '';
@@ -946,7 +970,7 @@ CHART_INIT[2] = () => {
     row.innerHTML = `
       <div class="ff-label">${t.label}</div>
       <div class="ff-bar-track">
-        <div class="ff-curprice" style="left:${curPct}%;"></div>
+        <div class="ff-curprice" style="left:${curPct}%;" data-label="Current $${cur.toFixed(0)}"></div>
         <div class="ff-bar ${t.cls}" style="left:${pctLow}%; width:${pctWidth}%;">$${px.toFixed(0)}</div>
       </div>
       <div class="ff-px">+${(v.upside_pct*100).toFixed(0)}% · IRR ${(v.irr_4yr*100).toFixed(1)}%</div>`;
@@ -1061,13 +1085,14 @@ CHART_INIT[5] = () => {
 CHART_INIT[6] = () => {
   const ctx = document.getElementById('ch-profitshare');
   if (!ctx) return;
+  const ps = D.profit_share_2025;
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Netflix', 'Disney+', 'WBD/HBO Max', 'Paramount+', 'Peacock'],
+      labels: ps.map(p => p.name),
       datasets: [{
         label: 'Approx. share of streaming OP, 2025E',
-        data: [90, 6, 2, 1, 1],
+        data: ps.map(p => p.share),
         backgroundColor: [C.navy, C.navyLight, C.teal, C.tealLight, C.warm],
         borderRadius: 3,
       }]
@@ -1129,13 +1154,14 @@ CHART_INIT[8] = () => {
   // Compare our base vs guide low / mid / high
   const base = D.scenarios.no_deal_base.projection[0];
   const bull = D.scenarios.no_deal_bull.projection[0];
+  const g = D.fy26_guide;
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: ['Guide low', 'Guide mid', 'Guide high', 'Our base', 'Our bull'],
       datasets: [
-        { label: 'Revenue ($B)', data: [50.7, 51.2, 51.7, base.revenue/1e9, bull.revenue/1e9], backgroundColor: C.navy, yAxisID: 'y' },
-        { type: 'line', label: 'EBIT margin', data: [31.5, 31.5, 31.5, base.ebit_margin*100, bull.ebit_margin*100], borderColor: C.teal, backgroundColor: C.teal, yAxisID: 'y2', borderWidth: 3 }
+        { label: 'Revenue ($B)', data: [g.revenue_low/1e9, g.revenue_mid/1e9, g.revenue_high/1e9, base.revenue/1e9, bull.revenue/1e9], backgroundColor: C.navy, yAxisID: 'y' },
+        { type: 'line', label: 'EBIT margin', data: [g.ebit_margin*100, g.ebit_margin*100, g.ebit_margin*100, base.ebit_margin*100, bull.ebit_margin*100], borderColor: C.teal, backgroundColor: C.teal, yAxisID: 'y2', borderWidth: 3 }
       ]
     },
     options: {
@@ -1154,13 +1180,14 @@ CHART_INIT[9] = () => {
   // WBD content spend chart
   const ctx = document.getElementById('ch-wbd-spend');
   if (!ctx) return;
+  const w = D.wbd_chart;
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: ['NFLX FY25\ncontent cash spend', 'NFLX 5-yr\ncontent spend', 'WBD EV at\nParamount-match', 'WBD library\nvalue (NFLX view)'],
       datasets: [{
         label: '$B',
-        data: [20.5, 110, 91.2, 91.2],
+        data: [w.nflx_fy25_content_cash_b, w.nflx_5yr_content_b, w.wbd_ev_paramount_match_b, w.wbd_library_view_b],
         backgroundColor: [C.navy, C.navyLight, C.magenta, C.teal],
         borderRadius: 4,
       }]

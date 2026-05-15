@@ -116,15 +116,18 @@ def build_historicals() -> dict:
 # 2024, but the FY24 10-K is the most recent disclosed breakdown.
 # FY25 totals from FY25 10-K filed 2026-01-23.
 SEGMENTS = {
-    "FY2024": {
-        "ucan": {"revenue": 17359e6, "members": 89.6e6, "arm": 17.26},      # US/Canada
-        "emea": {"revenue": 13693e6, "members": 101.0e6, "arm": 11.39},
-        "latam": {"revenue": 4886e6,  "members": 53.3e6,  "arm": 7.69},
-        "apac": {"revenue": 4061e6,   "members": 57.5e6,  "arm": 7.31},
+    "FY2024": {                                                              # last year NFLX disclosed subs+ARM by region
+        "ucan":  {"revenue": 17359369e3, "members": 89625e3,  "arm": 17.20},
+        "emea":  {"revenue": 12387035e3, "members": 101133e3, "arm": 10.96},
+        "latam": {"revenue": 4839816e3,  "members": 53327e3,  "arm": 8.24},
+        "apac":  {"revenue": 4414746e3,  "members": 57541e3,  "arm": 7.29},
     },
-    "FY2025": {
-        "total_revenue": 45180e6,
-        "total_paid_memberships_est": 325e6,  # mgmt commentary, end-2025
+    "FY2025": {                                                              # only revenue still disclosed; subs/ARM no longer broken out
+        "ucan":  {"revenue": 19957152e3},
+        "emea":  {"revenue": 14514646e3},
+        "latam": {"revenue": 5357521e3},
+        "apac":  {"revenue": 5353717e3},
+        "total_revenue": 45183036e3,
     },
 }
 
@@ -203,11 +206,9 @@ def project_scenario(scn: dict) -> list[dict]:
 
 # ------------------------------- 4. Valuation ------------------------------- #
 # Valuation framework: 5yr EBIT x exit multiple - debt + interim FCF.
-SHARES_OUT = 4344e6 / 1000  # mil shares already, store as 4.344B float
-# Note: VIC writeup quotes 4,344M shares; we use 4.344B.
-SHARES = 4.344e9
-CURRENT_PRICE = 83.00        # post-10:1 split (Nov 17 2025); $360B mkt cap / 4.344B sh
-EXISTING_NET_DEBT = 7.908e9  # VIC: $7.908B; matches our extracted ~$8B
+SHARES = 4_222_162_150       # NFLX FY25 10-K cover, as of Dec 31 2025 (post Nov-17-2025 10:1 split)
+CURRENT_PRICE = 83.00        # May 2026 mark; market cap ≈ $350B implied
+EXISTING_NET_DEBT = 7.908e9  # VIC framing; matches LongTermDebtNoncurrent − cash from XBRL
 EBIT_TO_FCF_CONVERSION = 0.80
 TAX_RATE = 0.22              # blended after-tax not used (we frame on EBIT)
 EXIT_MULTIPLE = 17.0         # forward EV/EBIT applied to FY30 EBIT
@@ -284,16 +285,49 @@ def main() -> None:
         for r in hist if r["content_cost_pct"] is not None
     ]
 
+    # FY26 mgmt guide (Q4 2025 shareholder letter, Jan 20 2026 8-K)
+    fy26_guide = {
+        "revenue_low": 50.7e9,
+        "revenue_mid": 51.2e9,
+        "revenue_high": 51.7e9,
+        "ebit_margin": 0.315,
+        "ad_revenue_target_b": 3.0,
+        "incl_acq_expense_m": 275,
+    }
+
+    # Approximate share of streaming operating profit, 2025E. Source: management
+    # commentary + Morgan Stanley media rollup Jan 2026 (qualitative ranking).
+    profit_share_2025 = [
+        {"name": "Netflix",      "share": 90},
+        {"name": "Disney+",      "share": 6},
+        {"name": "WBD/HBO Max",  "share": 2},
+        {"name": "Paramount+",   "share": 1},
+        {"name": "Peacock",      "share": 1},
+    ]
+
+    # WBD chart anchors — content cash spend, library value frame
+    wbd_chart = {
+        "nflx_fy25_content_cash_b": 20.5,    # NFLX cash spent on content FY25 (per shareholder letter)
+        "nflx_5yr_content_b": 110.0,         # rough 5-year cumulative content cash spend
+        "wbd_ev_paramount_match_b": 91.2,
+        "wbd_library_view_b": 91.2,
+    }
+
     out = {
         "as_of": "2026-05-15",
         "ticker": "NFLX",
         "current_price": CURRENT_PRICE,
         "shares_out": SHARES,
+        "market_cap_b": CURRENT_PRICE * SHARES / 1e9,
         "existing_net_debt": EXISTING_NET_DEBT,
         "fy25_actual": BASE_FY25,
         "historicals": hist,
         "segments_fy24": SEGMENTS["FY2024"],
+        "segments_fy25": SEGMENTS["FY2025"],
         "fy25_summary": SEGMENTS["FY2025"],
+        "fy26_guide": fy26_guide,
+        "profit_share_2025": profit_share_2025,
+        "wbd_chart": wbd_chart,
         "scenarios": {
             k: {
                 "label": SCENARIOS[k]["label"],
